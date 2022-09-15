@@ -1,21 +1,16 @@
 <!DOCTYPE html>
 <html lang="ko">
 <body>
-{% load static %}
 로그인 페이지
 <br>
 <br>
-{% if user.is_authenticated %}
-    로그인성공!
-    {{user.username}}님 환영합니다.
-    <a href="{% url 'user:logout' %}">로그아웃</a>
-{% else %}
-<form class="form-signin" method="POST" action="">
+
+<form class="form-signin" method="POST" action="user_login">
   <h1 class="h3 mb-3 font-weight-normal">로그인 테스트 화면</h1>
   <label for="inputId" class="sr-only">ID</label>
-  <input type="text" id="userid" name="userid" class="form-control" placeholder="ID" autofocus=""/>
+  <input type="text" id="userid" name="user_id" class="form-control" placeholder="ID" autofocus=""/>
   <label for="inputPassword" class="sr-only">Password</label>
-  <input type="password" id="userpw" name="userpw" class="form-control" placeholder="Password"/>
+  <input type="password" id="userpw" name="user_pw" class="form-control" placeholder="Password"/>
   <div class="checkbox mb-3">
     <label>
       <input type="checkbox" value="remember-me"> Remember me
@@ -23,6 +18,5 @@
   </div>
   <button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
 </form>
-{% endif %}
 </body>
 </html>

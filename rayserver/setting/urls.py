@@ -23,9 +23,10 @@ from rest_framework import routers, serializers, viewsets
 router = routers.DefaultRouter()
 
 urlpatterns = [
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('admin/', admin.site.urls),
+    path('api/', include(router.urls)),
+    path('', include('user.urls')),
 
-    path('', include(router.urls)),
-    path('auth/', include('user.urls')),
+
+    path('admin/', admin.site.urls),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
