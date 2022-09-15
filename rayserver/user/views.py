@@ -9,11 +9,11 @@ from .models import LoginUser
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth import authenticate, login, logout
 # Create your views here.
-
 @csrf_exempt
 def home_view(request):
     return render(request, "user/index.html")
 
+@csrf_exempt
 def signup_view(request):
     if request.method == 'POST':
         print("request "+ str(request))
@@ -28,6 +28,24 @@ def signup_view(request):
         return redirect("user:login")
         
     return render(request, "user/signup.html")
+
+@csrf_exempt
+def login_view(request):
+    if request.method == 'POST':
+        print("request "+ str(request))
+        print("body "+ str(request.body))
+        userid = request.POST.get("userid", "")
+        userpw = request.POST.get("userpw", "")
+        user = authenticate(username=userid, password=userpw)
+
+        print("userid = " + userid + " result = " + str(user))
+        if user:
+            print("로그인성공")
+            login(request, user)
+        else:
+            print("로그인실패")
+            return render(request, "user/login.html", status=401)
+    return render(request, "user/login.html")
 
 @csrf_exempt
 def logout_view(request):
