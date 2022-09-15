@@ -17,7 +17,7 @@ def home_view(request):
 def signup_view(request):
     if request.method == 'POST':
         print("request "+ str(request))
-        print("파일 : "+ request.FILES["profile_img"])
+        
         
         print("body "+ str(request.body))
         username = request.POST.get("username", "")
