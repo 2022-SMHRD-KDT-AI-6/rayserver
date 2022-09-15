@@ -14,7 +14,22 @@ from django.contrib.auth import authenticate, login, logout
 def home_view(request):
     return render(request, "user/index.html")
 
+def signup_view(request):
+    if request.method == 'POST':
+        print("request "+ str(request))
+        print("파일 : "+ request.FILES["profile_img"])
+        
+        print("body "+ str(request.body))
+        username = request.POST.get("username", "")
+        password = request.POST.get("password", "")
+        firstname = request.POST.get("firstname", "")
+        lastname = request.POST.get("lastname", "")
+        email = request.POST.get("email", "")
+        return redirect("user:login")
+        
+    return render(request, "user/signup.html")
 
+@csrf_exempt
 def logout_view(request):
     logout(request)
     return redirect("user:login")

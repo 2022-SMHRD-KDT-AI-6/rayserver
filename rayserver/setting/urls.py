@@ -21,11 +21,11 @@ from django.conf import settings
 
 from rest_framework import routers, serializers, viewsets
 router = routers.DefaultRouter()
+# router.register(r'user', UserViewSet)
 
 urlpatterns = [
     path('api/', include(router.urls)),
     path('', include('user.urls')),
-
 
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
