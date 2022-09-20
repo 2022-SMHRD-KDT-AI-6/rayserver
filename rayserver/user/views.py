@@ -5,7 +5,7 @@ from django.http import HttpResponse, JsonResponse
 from rest_framework.response import Response
 from django.views.decorators.csrf import csrf_exempt
 from .serializer import LoginUserSerializer
-from .models import LoginUser
+from .models import LoginUser, JoinTable
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth import authenticate, login, logout
 # Create your views here.
@@ -51,7 +51,7 @@ def login_view(request):
 @csrf_exempt
 def logout_view(request):
     logout(request)
-    return redirect("user:login")
+    return redirect("user:raylogin")
 
 
 
@@ -65,11 +65,12 @@ class UserLogin(APIView):
             print(Response(dict(msg="해당 ID의 사용자가 없습니다.")))
             return render(request, "user/login.html", status=401)
         if check_password(user_pw, user.user_pw):
-            Response(dict(msg="로그인 성공", user_id=user.user_id, birth_day=user.birth_day,
-                                 gender=user.gender, email=user.email, name=user.name, age=user.age))
+            data = dict(msg="로그인 성공", user_id=user.user_id, birth_day=user.birth_day,
+                                 gender=user.gender, email=user.email, name=user.name, age=user.age)
             # HttpResponse(status=200)
-            print('로그인성공')
-            return render(request, "user/index.html", status=200)
+            print('로그인성공했습니다.')
+            print(data['user_id'])
+            return render(request, "user/index.html", data, status=200)
         else:
             Response(dict(msg="로그인 실패. 패스워드 불일치"))
             return render(request, "user/login.html", status=401)
@@ -95,7 +96,7 @@ class UserRegist(APIView):
             )
             print('회원가입실패')
             print(data)
-            return render(request, "user/signup.html", data ,status=200)
+            return render(request, "user/signup.html", status=200)
         LoginUser.objects.create(user_id=user_id, user_pw=user_pw_crypted, birth_day=birth_day, gender=gender, email=email, name=name, age=age)
         data = dict(
             user_id=user_id,

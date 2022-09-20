@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<body>
+{% load static %}
+<link rel="stylesheet" href="{% static 'signup.css' %}"
+회원가입페이지
+<br>
+<br>
+{% comment %} <img src="{% static 'singup.png' %}" alt=""> {% endcomment %}
+<br>
+<br>
+<form class="form-signup" method="POST" action="user_regist">
+    {% csrf_token %}
+    <p>아이디</p>
+    <input name = "user_id" type="text">
+    <p>비밀번호</p>
+    <input name = "user_pw" type="password">
+    <p>생일</p>
+    <input name = "birth_day" type="text">
+    <p>성별</p>
+    <input name = "gender" type="text">
+    <p>이메일</p>
+    <input name = "email" type="text">
+    <p>이름</p>
+    <input name="name" type="text">
+    <p>나이</p>
+    <input name = "age" type="text">
+    <button class="btn btn-lg btn-primary btn-block" type="submit">회원가입</button>
+</form>
+</body>
+</html>

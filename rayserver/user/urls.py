@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import UserRegist, UserLogin, MobileLogin, MobileRegist
-from .views import home_view, signup_view, login_view
+from .views import home_view, signup_view, login_view, logout_view
 
 app_name = "user"
 
@@ -9,6 +9,7 @@ urlpatterns = [
     path('', home_view, name=''),
     path('signup', signup_view, name='signup'),
     path('raylogin', login_view, name='raylogin'),
+    path('logout',logout_view, name='logout'),
 
 
 # 테스트
