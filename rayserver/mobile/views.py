@@ -27,5 +27,3 @@ class MobileLogin(APIView):
             return Response(dict(msg="로그인 실패. 패스워드 불일치", code="400"))
 
 
-
-
