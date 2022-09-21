@@ -25,7 +25,7 @@ class JoinTable(models.Model):
     mem_joindate = models.DateField(verbose_name="회원 가입일자", null=False, auto_now_add=True)
     mem_type = models.CharField(verbose_name="회원 유형", max_length=1, null=False)
     class Meta:
-        db_table = 't_member'
+        db_table = 't_member22'
         verbose_name = '회원 테이블'
 
     def __str__(self):

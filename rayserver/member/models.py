@@ -26,9 +26,9 @@ class Members(models.Model):
     mem_gender = models.CharField(verbose_name="회원 성별", max_length = 1, null=False)
     mem_joindate = models.DateField(verbose_name="회원 가입일자", auto_now_add=True)
     mem_type = models.CharField(verbose_name="회원 유형", max_length=1, null=False)
-    
+
     class Meta:
-        db_table = 'tmember'
+        db_table = 't_member'
         verbose_name = '회원 테이블'
 
     def __str__(self):
