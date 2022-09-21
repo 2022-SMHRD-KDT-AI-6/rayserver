@@ -8,9 +8,8 @@ from .serializer import LoginUserSerializer
 from .models import LoginUser, JoinTable
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth import authenticate, login, logout
+
 # Create your views here.
-
-
 
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
@@ -87,8 +86,6 @@ class UserLogin(APIView):
         else:
             Response(dict(msg="로그인 실패. 패스워드 불일치"))
             return render(request, "user/login.html", status=401)
-
-
 
 
 class UserRegist(APIView):
