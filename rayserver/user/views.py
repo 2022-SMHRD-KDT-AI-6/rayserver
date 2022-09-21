@@ -65,8 +65,6 @@ def logout_view(request):
     logout(request)
     return redirect("user:raylogin")
 
-
-
 class UserLogin(APIView):
     @csrf_exempt 
     def post(self, request):
@@ -86,7 +84,6 @@ class UserLogin(APIView):
         else:
             Response(dict(msg="로그인 실패. 패스워드 불일치"))
             return render(request, "user/login.html", status=401)
-
 
 class UserRegist(APIView):
     @csrf_exempt 

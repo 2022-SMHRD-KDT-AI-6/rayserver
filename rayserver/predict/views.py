@@ -31,3 +31,6 @@ def result(request):
     else:
         result1 = "건강하신거 같은데 의사선생님께 확인 하세요"
     return render(request, 'predict/result.html', {"result_pred":result1})    
+
+def imgTest(request):
+    return render(request, 'predict/')
