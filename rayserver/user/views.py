@@ -162,5 +162,3 @@ class MobileRegist(APIView):
         user = serializer.create(request.data)
         return Response(data=LoginUserSerializer(user).data)
 
-
-

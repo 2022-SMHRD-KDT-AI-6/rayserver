@@ -30,7 +30,8 @@ urlpatterns = [
     path('user/', include('user.urls')),
     path('predict/', include('predict.urls')),
     path('member/', include('member.urls')),
-
+    
+    path('mobile/', include('mobile.urls')),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
