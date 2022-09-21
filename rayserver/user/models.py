@@ -22,8 +22,15 @@ class JoinTable(models.Model):
     mem_name = models.CharField(verbose_name="회원 이름", max_length=30, null=False, default=False)
     mem_birth = models.DateField(verbose_name="회원 생년월일", null=False)
     mem_gender = models.CharField(verbose_name="회원 성별", max_length = 1, null=False)
-    mem_joindate = models.DateField(verbose_name="회원 가입일자", null=False)
+    mem_joindate = models.DateField(verbose_name="회원 가입일자", null=False, auto_now_add=True)
     mem_type = models.CharField(verbose_name="회원 유형", max_length=1, null=False)
     class Meta:
-        db_table = 't_member2'
+        db_table = 't_member'
         verbose_name = '회원 테이블'
+
+    def __str__(self):
+        return '이름:' + self.mem_name + ", 성별: "+self.mem_gender
+
+
+
+

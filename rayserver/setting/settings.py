@@ -74,6 +74,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'user',
     'predict',
+    'home',
+    'member',
+    'mobile',
 ]
 
 MIDDLEWARE = [
@@ -161,6 +164,12 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,"static"),
 ]
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.request',
+)
+
+
 MEDIA_URL = "/media/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR,"media")

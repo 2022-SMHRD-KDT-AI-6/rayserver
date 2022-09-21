@@ -9,9 +9,22 @@ from .models import LoginUser, JoinTable
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth import authenticate, login, logout
 # Create your views here.
+
+
+
+from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_exempt
+from datetime import datetime
+from django.http import HttpResponse, JsonResponse
+
+
 @csrf_exempt
 def home_view(request):
-    return render(request, "user/index.html")
+    context = {}
+    # m_id 세션변수 값이 없다면 ''을 넣어라
+    context['m_id'] = request.session.get('m_id','')
+    context['m_name'] = request.session.get('m_name','')
+    return render(request, "user/index.html", context)
 
 @csrf_exempt
 def signup_view(request):
@@ -74,6 +87,9 @@ class UserLogin(APIView):
         else:
             Response(dict(msg="로그인 실패. 패스워드 불일치"))
             return render(request, "user/login.html", status=401)
+
+
+
 
 class UserRegist(APIView):
     @csrf_exempt 
