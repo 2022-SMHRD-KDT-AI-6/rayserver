@@ -73,6 +73,19 @@
             <li class="nav-item nav-profile dropdown">
               <a class="nav-link dropdown-toggle" id="profileDropdown" href="/pages/samples/loginn.html" data-toggle="dropdown" aria-expanded="false">
                 
+                {% if not 'm_id' in request.session %}
+                <a href="/member/register">[회원가입]</a><br>
+                <a href="/member/login">[로그인]</a>
+            {% else %}
+                {{ m_name }} 님 어서오세요.
+                <br><br>
+                <a href="/member/logout">[로그아웃]</a>
+            {% endif %}
+            
+            {% if message %}
+            <script>alert('{{ message }}');</script>
+            {% endif %}
+
                 <div class="nav-profile-text">
                   <p class="mb-1 text-black">로그인
                   </p>
