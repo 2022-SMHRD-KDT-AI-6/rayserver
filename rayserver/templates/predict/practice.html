@@ -1,8 +1,8 @@
 {% extends "include/base.html" %}
 {% block main_area %}
-    <h1>회원가입폼</h1>
+    <h1>이미지테스트</h1>
 
-<form name="f2" method="post" enctype="multipart/form-data">
+	<form action="postcreate" enctype="multipart/form-data" method="POST">
 {% csrf_token %}
     <table width="300" border="1" cellpadding="2" cellspacing="0">
     <tbody>
@@ -20,17 +20,13 @@
     </tr>
     </tbody>
     </table>
+    <input class="btn btn-dark" type="submit" value="글쓰기">
 </form>
 <br>
-<button type="button" onclick="memReg()">이미지저장</button>
+
 <script>
 
 
-function memReg() {
-    var form = document.f2;
-    form.action = "/predict/upload/";
-    form.submit();
-}
 </script>
 {% if message %}
 <script>alert('{{ message }}');</script>

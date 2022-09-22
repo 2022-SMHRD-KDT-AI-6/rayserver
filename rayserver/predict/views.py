@@ -8,21 +8,6 @@ def home(request):
 def predict(request):
     return render(request, 'predict/predict.html')
 
-def practice(request):
-    if request.method == "POST":
-        print(111, request.POST)
-        print(222, request.FILES)
-        image =  request.FILES["image"]
-        title = request.POST["title"]
-        text = request.POST["text"]
-        image = request.POST["image"]
-
-        upload = Post.objects.create(title,text,image)
-        upload.image = image
-        upload.save()
-        return redirect("/")
-    return render(request, 'predict/practice.html')
-
 
 def result(request):
     import numpy as np
@@ -49,17 +34,33 @@ def result(request):
         result1 = "건강하신거 같은데 의사선생님께 확인 하세요"
     return render(request, 'predict/result.html', {"result_pred":result1})    
 
-def upload(request):
+def postcreate2(request):
     if request.method == "POST":
         print(111, request.POST)
         print(222, request.FILES)
         image =  request.FILES["image"]
         title = request.POST["title"]
         text = request.POST["text"]
-        image = request.POST["image"]
+        # image = request.POST["image"]
 
         upload = Post.objects.create(title,text,image)
         upload.image = image
         upload.save()
         return redirect("/")
+
+def practice(request):
+    return render(request, 'predict/practice.html')
+
+def detail(request):
+    return render(request, 'predict/detail.html')
+
+def postcreate(request):
+    blog = Post()
+    blog.title = request.POST["title"]
+    blog.text = request.POST["text"]
+    blog.image =  request.FILES["image"]
+    blog.save()
+    # return redirect("user:raylogin" + str(blog.id))
+    return redirect("detail/"+str(blog.id))
+
         

@@ -11,5 +11,8 @@ urlpatterns = [
     path('predict', views.predict, name='predict'),
     path('result', views.result, name='result'),
     path('practice', views.practice, name='practice'),
-    path('upload',views.upload, name='upload'),
+    path('postcreate', views.postcreate, name='postcreate'),
+    path('detail', views.detail, name='detail'),
+    
+    # path('upload',views.upload, name='upload'),
 ]
