@@ -38,9 +38,10 @@ def postcreate2(request):
     if request.method == "POST":
         print(111, request.POST)
         print(222, request.FILES)
-        image =  request.FILES["image"]
+        
         title = request.POST["title"]
         text = request.POST["text"]
+        image =  request.FILES["image"]
         # image = request.POST["image"]
 
         upload = Post.objects.create(title,text,image)

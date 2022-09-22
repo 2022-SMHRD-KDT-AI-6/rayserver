@@ -19,11 +19,11 @@ class Post(models.Model):
 
 
 class Test(models.Model):
-    exam_img = models.CharField(verbose_name="검사 이미지", max_length=400, null=False)
-    exam_date = models.CharField(verbose_name="검사 날짜", max_length=400, null=False)
-    exam_result = models.CharField(verbose_name="검사 결과", max_length=400, null=False)
+    mem_seq = models.AutoField()
+    exam_img = models.ImageField(verbose_name="검사 이미지",  null=False)
+    exam_date = models.DateTimeField(verbose_name="검사 날짜", null=False)
+    exam_result = models.TextField(verbose_name="검사 결과",  null=False)
     mem_id = models.ForeignKey(Members, verbose_name="회원 아이디", on_delete=models.CASCADE, null=False)
-
     class Meta:
         db_table = 't_exam2'
         verbose_name = '검사 테이블2'
