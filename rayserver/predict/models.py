@@ -17,6 +17,19 @@ class Post(models.Model):
     def summary(self):
         return self.body[:100]
 
+class Sale(models.Model):
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+    age = models.IntegerField(default=0)
+    person = models.ForeignKey("Person", on_delete=models.CASCADE)
+
+class Person(models.Model):
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+    
+
+
+
 
 class Test(models.Model):
     mem_seq = models.AutoField(primary_key=True)
@@ -43,4 +56,14 @@ class Test1(models.Model):
     class Meta:
         db_table = 'imgtest2'
         verbose_name = '이미지테스트2'
+
+class Test2(models.Model):
+    mem_seq = models.AutoField(primary_key=True)
+    exam_img = models.ImageField(verbose_name="검사 이미지",  null=False)
+    exam_date = models.DateTimeField(verbose_name="검사 날짜", auto_now_add=True)
+    exam_result = models.TextField(verbose_name="검사 결과",  null=False)
+    mem_id = models.CharField(verbose_name="회원 아이디", max_length=200)
+    class Meta:
+        db_table = 'test2'
+        verbose_name = 'test2'
 

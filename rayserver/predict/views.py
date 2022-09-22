@@ -1,5 +1,5 @@
 
-from .models import Post, Test
+from .models import Post, Test, Test2
 from django.shortcuts import render, redirect
 from datetime import datetime
 # Create your views here.
@@ -53,8 +53,14 @@ def postcreate2(request):
 def practice(request):
     return render(request, 'predict/practice.html')
 
+
+
+
 def detail(request):
     return render(request, 'predict/detail.html')
+
+
+
 
 def postcreate(request):
     blog = Post()
@@ -67,7 +73,7 @@ def postcreate(request):
 
 def imgtest(request):
     if request.method == "POST":
-        test = Test()
+        test = Test2()
         test.exam_img =  request.FILES["exam_img"]
         test.exam_date = datetime.now()
         test.exam_result = request.POST["exam_result"]
