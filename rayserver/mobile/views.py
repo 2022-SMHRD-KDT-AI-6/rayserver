@@ -42,13 +42,13 @@ class MobileRegist(APIView):
         rs = Members.objects.filter(mem_id=mem_id)
         if rs.exists():
             context['message'] = mem_id + "가 중복됩니다."
-            return Response(dict(msg="아이디 중복", mem_id=rs.mem_id, code="400"))
+            return Response(dict(msg="아이디 중복", code="400"))
         else:
             Members.objects.create(
                 mem_id=mem_id, mem_pw=mem_pw_crypted,  mem_name=mem_name, mem_birth=mem_birth, mem_gender=mem_gender, mem_type=mem_type,
                 mem_joindate=datetime.now())
             context['message'] = mem_name + "님 회원가입 되었습니다."
-            return Response(dict(msg="회원가입성공", mem_id=rs.mem_id, code="200"))
+            return Response(dict(msg="회원가입성공", code="200"))
 
 
 
