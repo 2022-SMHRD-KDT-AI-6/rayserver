@@ -1,6 +1,7 @@
 
-from .models import Post
+from .models import Post, Test
 from django.shortcuts import render, redirect
+from datetime import datetime
 # Create your views here.
 def home(request):
     return render(request, 'predict/home.html')
@@ -64,4 +65,16 @@ def postcreate(request):
     # return redirect("user:raylogin" + str(blog.id))
     return redirect("detail/"+str(blog.id))
 
-        
+def imgtest(request):
+    if request.method == "POST":
+        test = Test()
+        test.exam_img =  request.FILES["exam_img"]
+        test.exam_date = datetime.now()
+        test.exam_result = request.POST["exam_result"]
+        test.mem_id = request.POST["mem_id"]
+        test.save()
+        print('123')
+        return render(request, 'predict/predict.html')
+    return render(request, 'predict/imgtest.html')
+    # return redirect("user:raylogin" + str(blog.id))
+    # return redirect("detail/"+str(blog.id))
