@@ -1,0 +1,39 @@
+{% extends "include/base.html" %}
+{% block main_area %}
+    <h1>회원가입폼</h1>
+
+<form name="f2" method="post" enctype="multipart/form-data">
+{% csrf_token %}
+    <table width="300" border="1" cellpadding="2" cellspacing="0">
+    <tbody>
+    <tr>
+        <td>제목 : </td>
+        <td><input type="text" name="title"></td>
+    </tr>
+    <tr>
+        <td>내용 : </td>
+        <td><input type="password" name="text"></td>
+    </tr>
+    <tr>
+        <td>이미지 : </td>
+        <td><input type="file" name="image"></td>
+    </tr>
+    </tbody>
+    </table>
+</form>
+<br>
+<button type="button" onclick="memReg()">이미지저장</button>
+<script>
+
+
+function memReg() {
+    var form = document.f2;
+    form.action = "/predict/upload/";
+    form.submit();
+}
+</script>
+{% if message %}
+<script>alert('{{ message }}');</script>
+{% endif %}
+{% endblock %}
+

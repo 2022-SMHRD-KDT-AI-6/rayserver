@@ -1,11 +1,28 @@
-from django.shortcuts import render
 
+from .models import Post
+from django.shortcuts import render, redirect
 # Create your views here.
 def home(request):
     return render(request, 'predict/home.html')
 
 def predict(request):
     return render(request, 'predict/predict.html')
+
+def practice(request):
+    if request.method == "POST":
+        print(111, request.POST)
+        print(222, request.FILES)
+        image =  request.FILES["image"]
+        title = request.POST["title"]
+        text = request.POST["text"]
+        image = request.POST["image"]
+
+        upload = Post.objects.create(title,text,image)
+        upload.image = image
+        upload.save()
+        return redirect("/")
+    return render(request, 'predict/practice.html')
+
 
 def result(request):
     import numpy as np
@@ -32,5 +49,17 @@ def result(request):
         result1 = "건강하신거 같은데 의사선생님께 확인 하세요"
     return render(request, 'predict/result.html', {"result_pred":result1})    
 
-def imgTest(request):
-    return render(request, 'predict/')
+def upload(request):
+    if request.method == "POST":
+        print(111, request.POST)
+        print(222, request.FILES)
+        image =  request.FILES["image"]
+        title = request.POST["title"]
+        text = request.POST["text"]
+        image = request.POST["image"]
+
+        upload = Post.objects.create(title,text,image)
+        upload.image = image
+        upload.save()
+        return redirect("/")
+        

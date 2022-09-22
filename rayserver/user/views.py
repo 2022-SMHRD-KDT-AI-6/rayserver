@@ -11,10 +11,10 @@ from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 
-from django.shortcuts import render, redirect
-from django.views.decorators.csrf import csrf_exempt
+
+
 from datetime import datetime
-from django.http import HttpResponse, JsonResponse
+
 
 
 @csrf_exempt

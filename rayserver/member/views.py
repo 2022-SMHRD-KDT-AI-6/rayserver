@@ -6,6 +6,7 @@ from .models import Members
 from django.contrib.auth.hashers import make_password, check_password
 from rest_framework.response import Response
 
+
 def index(request):
     context = {}
     # m_id 세션변수 값이 없다면 '' 을 넣어라
@@ -13,6 +14,7 @@ def index(request):
     context['m_name'] = request.session.get('m_name', '')
     return render(request, 'member/index.html', context)
 
+@csrf_exempt
 def member_reg(request):
     if request.method == "GET":
         return render(request, 'member/member_reg.html')
@@ -40,7 +42,7 @@ def member_reg(request):
             context['message'] = mem_name + "님 회원가입 되었습니다."
             return render(request, 'home/index.html', context)
 
-
+@csrf_exempt
 def member_login(request):
     if request.method == "GET":
         return render(request, 'member/login.html')
@@ -71,7 +73,7 @@ def member_login(request):
         else:
             context['message'] = "로그인 실패. 패스워드 불일치\\n\\n확인하신 후 다시 시도해 주십시오."
             return render(request, 'member/login.html', context)
-
+@csrf_exempt
 def member_logout(request):
     request.session.flush()
     return redirect('/')

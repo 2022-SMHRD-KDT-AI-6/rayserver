@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
-@csrf_exempt
+
 def index(request):
     context = {}
     # m_id 세션변수 값이 없다면 '' 을 넣어라
@@ -11,7 +11,7 @@ def index(request):
     return render(request, 'home/index.html', context)
 
 
-@csrf_exempt
+
 def home_view(request):
     context = {}
     # m_id 세션변수 값이 없다면 '' 을 넣어라
