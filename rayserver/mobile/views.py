@@ -61,7 +61,6 @@ class ImageScore(APIView):
         print(user_id)
         test = ImgSave()
         test.exam_img =  request.FILES["exam_img"]
-        test.exam_date = datetime.now()
         test.exam_result = '1'
         test.mem = user_id
         test.save()
@@ -71,7 +70,6 @@ class ImageScore(APIView):
 def imgtest2(request):
     if request.method == "POST":
         mem_id = request.POST["mem_id"]
-
         user_id = Members.objects.get(pk=mem_id)
         print(user_id)
         test = ImgSave()
