@@ -81,20 +81,12 @@ def postcreate(request):
 
 def imgtest(request):
     if request.method == "POST":
-        # mem_id = request.POST["mem_id"]
         mem_id = request.session['m_id']
-        # mem_id = '111'
         user_id = Members.objects.get(pk=mem_id)
-        # user_id = Members.objects.filter(mem_id='111')
-        print(user_id)
         test = ImgSave()
         test.exam_img =  request.FILES["exam_img"]
-        test.exam_date = datetime.now()
         test.exam_result = '1'
         test.mem = user_id
         test.save()
-        print('123')
         return render(request, 'predict/predict.html')
     return render(request, 'predict/imgtest.html')
-    # return redirect("user:raylogin" + str(blog.id))
-    # return redirect("detail/"+str(blog.id))
