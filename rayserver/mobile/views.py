@@ -51,4 +51,29 @@ class MobileRegist(APIView):
             return Response(dict(msg="회원가입성공", code="200"))
 
 
+class ImageScore(APIView):
+    def post(self, request):
+        print("로그 : " + str(request.body))
+        context = {}
+        mem_id = request.data.get('mem_id', "")
+        mem_pw = request.data.get('mem_pw', "")
+        mem_name = request.data.get('mem_name', "")
+        mem_birth = request.data.get('mem_birth', "")
+        mem_gender = request.data.get('mem_gender', "")
+        mem_type = request.data.get('mem_type', "")
+
+        mem_pw_crypted = make_password(mem_pw)    # 암호화
+        # 회원가입 중복체크
+        rs = Members.objects.filter(mem_id=mem_id)
+        if rs.exists():
+            context['message'] = mem_id + "가 중복됩니다."
+            return Response(dict(msg="아이디 중복", code="400"))
+        else:
+            Members.objects.create(
+                mem_id=mem_id, mem_pw=mem_pw_crypted,  mem_name=mem_name, mem_birth=mem_birth, mem_gender=mem_gender, mem_type=mem_type,
+                mem_joindate=datetime.now())
+            context['message'] = mem_name + "님 회원가입 되었습니다."
+            return Response(dict(msg="회원가입성공", code="200"))
+
+
 

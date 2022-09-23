@@ -1,0 +1,9 @@
+<body>
+    <!--해당 링크로 보낼거니, action속성은 없어도 된다.-->
+    <form action="{% url 'board:create' %}" method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="제출">
+    </form>
+    
+    </body>

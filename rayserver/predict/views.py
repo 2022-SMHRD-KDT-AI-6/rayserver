@@ -1,7 +1,8 @@
 
-from .models import Post, Test, Test2
+from .models import ImgSave, Post, Test, Test2, Test3
 from django.shortcuts import render, redirect
 from datetime import datetime
+from member.models import Members
 # Create your views here.
 def home(request):
     return render(request, 'predict/home.html')
@@ -71,13 +72,26 @@ def postcreate(request):
     # return redirect("user:raylogin" + str(blog.id))
     return redirect("detail/"+str(blog.id))
 
+
+        #       {% if not 'm_id' in request.session %}
+        #       <a href="/member/register">[회원가입]</a><br>
+        #       <a href="/member/login">[로그인]</a>
+        #   {% else %}
+        #       {{ m_name }} 님 어서오세요.
+
 def imgtest(request):
     if request.method == "POST":
-        test = Test2()
+        # mem_id = request.POST["mem_id"]
+        mem_id = request.session['m_id']
+        # mem_id = '111'
+        user_id = Members.objects.get(pk=mem_id)
+        # user_id = Members.objects.filter(mem_id='111')
+        print(user_id)
+        test = ImgSave()
         test.exam_img =  request.FILES["exam_img"]
         test.exam_date = datetime.now()
-        test.exam_result = request.POST["exam_result"]
-        test.mem_id = request.POST["mem_id"]
+        test.exam_result = '1'
+        test.mem = user_id
         test.save()
         print('123')
         return render(request, 'predict/predict.html')

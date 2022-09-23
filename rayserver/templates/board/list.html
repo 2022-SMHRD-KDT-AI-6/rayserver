@@ -1,0 +1,19 @@
+<table class="table table-hover">
+    <thead>
+    <tr class="table-dark">
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일시</th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for writing in writing_list %}
+        <tr>
+        <th>{{writing.subject}}</th>
+        <th>{{writing.mem_id.mem_id}}</th>
+        <th>{{writing.create_date}}</th>
+        <tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'board:create' %}" class="btn btn-primary">글쓰기</a>

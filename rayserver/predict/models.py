@@ -29,8 +29,6 @@ class Person(models.Model):
     
 
 
-
-
 class Test(models.Model):
     mem_seq = models.AutoField(primary_key=True)
     exam_img = models.ImageField(verbose_name="검사 이미지",  null=False)
@@ -67,3 +65,28 @@ class Test2(models.Model):
         db_table = 'test2'
         verbose_name = 'test2'
 
+class Test3(models.Model):
+    mem_seq = models.AutoField(primary_key=True)
+    exam_img = models.ImageField(verbose_name="검사 이미지",  null=False)
+    exam_date = models.DateTimeField(verbose_name="검사 날짜", auto_now_add=True)
+    exam_result = models.TextField(verbose_name="검사 결과",  null=False)
+    members = models.ForeignKey(Members, verbose_name="회원 아이디", on_delete=models.CASCADE, null=False)
+    class Meta:
+        db_table = 't_exam3'
+        verbose_name = '검사 테이블3'
+
+class ImgSave(models.Model):
+    mem_seq = models.AutoField(primary_key=True)
+    exam_img = models.ImageField(verbose_name="검사 이미지",  null=False)
+    exam_date = models.DateTimeField(verbose_name="검사 날짜", auto_now_add=True)
+    exam_result = models.TextField(verbose_name="검사 결과",  null=False)
+    mem = models.ForeignKey(Members, verbose_name="회원 아이디", on_delete=models.CASCADE, null=False)
+    class Meta:
+        db_table = 't_exam'
+        verbose_name = '검사 테이블'
+    
+    def __str__(self):
+        return self.exam_result
+    
+    def summary(self):
+        return self.body[:100]
