@@ -55,7 +55,6 @@ class MobileRegist(APIView):
 class ImageScore(APIView):
     def post(self, request):
         print("로그 : " + str(request.body))
-        context = {}
         mem_id = request.data.get('mem_id', "")
         user_id = Members.objects.get(pk=mem_id)
         print(user_id)
