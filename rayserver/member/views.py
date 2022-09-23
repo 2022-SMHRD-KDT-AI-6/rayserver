@@ -27,10 +27,13 @@ def member_reg(request):
         mem_birth_m = request.POST["mem_birth_m"]
         mem_birth_d = request.POST["mem_birth_d"]
         mem_birth = mem_birth_y+"-"+mem_birth_m+"-"+mem_birth_d
+
+
+
         mem_gender = request.POST["mem_gender"]
         mem_type = request.POST["mem_type"]
         mem_pw_crypted = make_password(mem_pw)    # 암호화
-
+        print(mem_birth)
 
         # 회원가입 중복체크
         rs = Members.objects.filter(mem_id=mem_id)
@@ -43,6 +46,7 @@ def member_reg(request):
                 mem_id=mem_id, mem_pw=mem_pw_crypted,  mem_name=mem_name, mem_birth=mem_birth, mem_gender=mem_gender, mem_type=mem_type,
                 mem_joindate=datetime.now())
             context['message'] = mem_name + "님 회원가입 되었습니다."
+
             return render(request, 'home/index.html', context)
 
 @csrf_exempt

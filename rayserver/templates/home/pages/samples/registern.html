@@ -26,34 +26,28 @@
             <form name="f1" method="post">
             <div>
                 <!--아이디,비번,비번재확인-->
-
                 <h3>아이디</h3>
                 <span class="signup-input">
                     <input id="signup-id" type="text" name="mem_id"></input>
                     <span class="signup-at"></span>
                 </span>
-
                 <h3>비밀번호</h3>
                 <span class="signup-input">
-                    <input id="signup-pw" type="text" name="mem_pw"></input>
+                    <input id="signup-pw" type="password" name="mem_pw"></input>
                     <span class="pw-lock"></span>
                 </span>
-
                 <!-- <h3>비밀번호 재확인</h3>
                 <span class="signup-input">
                     <input id="signup-pww" type="text"></input>
                     <span class="pww-lock"></span>
                 </span> -->
-
             </div>
-
             <div style="margin-top: 35px;">
                 <!--이름,생년월일,성별,이메일-->
                 <h3>이름</h3>
                 <span class="signup-input">
                     <input id="signup-name" type="text" name="mem_name"></input>
                 </span>
-
                 <h3>생년월일</h3>
                 <span style="display: flex;">
                     <span class="signup-input-birth">
@@ -84,9 +78,8 @@
                 <h3>성별</h3>
                 <span class="signup-input">
                     <select id="signup-gender" class="selectbox" name="mem_gender" onchange="">
-                        <option value="gender">성별</option>
-                        <option value="man">남자</option>
-                        <option value="woman">여자</option>
+                        <option value="m">남자</option>
+                        <option value="w">여자</option>
                         <!-- <option value="no">선택 안함</option> -->
                     </select>
                 </span>
