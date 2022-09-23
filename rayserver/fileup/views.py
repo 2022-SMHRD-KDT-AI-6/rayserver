@@ -38,6 +38,7 @@ def upload_success(request):
 
 
 
+# 공부
 @csrf_protect
 def upload_success2(request):
     if 'file1' in request.FILES:
