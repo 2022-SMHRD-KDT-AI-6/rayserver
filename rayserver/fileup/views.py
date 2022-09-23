@@ -1,6 +1,10 @@
 from django.shortcuts import render
 from board.models import Writing
 from django.views.decorators.csrf import csrf_protect
+# from keras.models import model_from_json
+from PIL import Image
+import numpy as np
+
 # Create your views here.
 # Create your views here.
 def main(request):
@@ -39,6 +43,7 @@ def upload_success2(request):
     if 'file1' in request.FILES:
         file = request.FILES['file1']
         file_name = file.name
+        
         fp = open("%s%s" % (UPLOAD_DIR, file_name), 'wb')
         for chunk in file.chunks():
             fp.write(chunk)
