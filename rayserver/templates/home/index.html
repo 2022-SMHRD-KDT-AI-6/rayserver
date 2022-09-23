@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+
+
+
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -28,9 +31,9 @@
       <!-- partial:partials/_navbar.html -->
       <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-          <a class="navbar-brand brand-logo" href="index.html"><img src="{% static 'assets/images/reylogo.png' %}"/></a>
+          <a class="navbar-brand brand-logo" href="/"><img src="{% static 'assets/images/reylogo.png' %}"/></a>
           <!-- <a class="navbar-brand brand-logo-mini" href="index.html"><img src="assets/images/logo-mini.svg" alt="logo" /></a> -->
-          <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{% static 'assets/images/reylogo.png' %}"/></a>
+          <a class="navbar-brand brand-logo-mini" href="/"><img src="{% static 'assets/images/reyhlg.png' %}"/></a>
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-stretch">
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -47,6 +50,7 @@
             </form>
           </div>
           <ul class="navbar-nav navbar-nav-right">
+            {% if 'm_id' in request.session %}
             <li class="nav-item  dropdown d-none d-md-block">
               <a class="nav-link dropdown-toggle" id="reportDropdown" href="#" data-toggle="dropdown" aria-expanded="false"> 결과 다운받기</a>
               <div class="dropdown-menu navbar-dropdown" aria-labelledby="reportDropdown">
@@ -60,6 +64,7 @@
                   <i class="mdi mdi-file-word mr-2"></i>doc </a>
               </div>
             </li>
+            {% endif %}
               <!-- <li class="nav-item  dropdown d-none d-md-block">
               <a class="nav-link dropdown-toggle" id="projectDropdown" href="#" data-toggle="dropdown" aria-expanded="false"> Projects </a>
               <div class="dropdown-menu navbar-dropdown" aria-labelledby="projectDropdown">
@@ -69,15 +74,10 @@
                 <a class="dropdown-item" href="#">
                   <i class="mdi mdi-pencil-outline mr-2"></i>Edit Project </a>
               </div> -->
-              {% if not 'm_id' in request.session %}
-              <a href="/member/register">[회원가입]</a><br>
-              <a href="/member/login">[로그인]</a>
-          {% else %}
-              {{ m_name }} 님 어서오세요.
-              <br><br>
-              <a href="/member/logout">[로그아웃]</a>
-          {% endif %}
+         
           
+          
+
           {% if message %}
           <script>alert('{{ message }}');</script>
           {% endif %}
@@ -87,14 +87,31 @@
 
 
                 <div class="nav-profile-text">
-                  
-                  <p class="mb-1 text-black">로그인
+                  {% if 'm_id' in request.session %}
+                  <p class="mb-1 text-black">{{ m_name }} 님
                   </p>
+                  {% else %}
+                  <p class="mb-1 text-black">사용자
+                  </p>
+                  {% endif %}
                 </div>
               </a>
               <div class="dropdown-menu navbar-dropdown dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="profileDropdown" data-x-placement="bottom-end">
                 <div class="p-2">
                   <h5 class="dropdown-header text-uppercase pl-2 text-dark">사용자</h5>
+                  
+                  <!-- 여기가 구분선 -->
+                  {% if not 'm_id' in request.session %}
+                  <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="/member/register">
+                    <span>회원가입</span>
+                    <i class="mdi mdi-lock ml-1"></i>
+                  </a>
+                  <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="/member/login">
+                    <span>로그인</span>
+                    <i class="mdi mdi-account-outline ml-1 "></i>
+                  </a>
+                  {% else %}
+
                   <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="#">
                     <span>쪽지</span>
                     <span class="p-0">
@@ -114,23 +131,24 @@
                     <i class="mdi mdi-settings"></i>
                   </a>
                   <div role="separator" class="dropdown-divider"></div>
-                  <!-- 여기가 구분선 -->
-                  <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="#">
-                    <span>로그인 유지</span>
-                    <i class="mdi mdi-lock ml-1"></i>
-                  </a>
-                  <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="/pages/samples/loginn.html">
-                    <span>로그인</span>
+
+                  <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="/member/logout">
+                    <span>로그아웃</span>
                     <i class="mdi mdi-logout ml-1"></i>
                   </a>
+                  {% endif %}
                 </div>
               </div>
             </li>
-            <li class="nav-item dropdown">
-              <!-- <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+
+
+            <!-- 
+              //여기가 그 위에 상단바에 원래 있던 메일부분// 
+              <li class="nav-item dropdown">
+              <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
                 <i class="mdi mdi-email-outline"></i>
                 <span class="count-symbol bg-success"></span>
-              </a> //여기가 그 위에 상단바에 원래 있던 메일부분//--> 
+              </a> 
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
                 <h6 class="p-3 mb-0 bg-primary text-white py-4">Messages</h6>
                 <div class="dropdown-divider"></div>
@@ -166,14 +184,19 @@
                 <div class="dropdown-divider"></div>
                 <h6 class="p-3 mb-0 text-center">4 new messages</h6>
               </div>
-            </li>
+            </li> -->
+            <!-- 원래 메일 드롭바 마지막 -->
+
+
+            <!-- 여기는 알림아이콘 부분 시작 -->
+            {% if 'm_id' in request.session %}
             <li class="nav-item dropdown">
               <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
                 <i class="mdi mdi-bell-outline"></i>
                 <span class="count-symbol bg-danger"></span>
               </a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-                <h6 class="p-3 mb-0 bg-primary text-white py-4">Notifications</h6>
+                <h6 class="p-3 mb-0 bg-primary text-white py-4">알림!</h6>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item preview-item">
                   <div class="preview-thumbnail">
@@ -182,8 +205,8 @@
                     </div>
                   </div>
                   <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                    <h6 class="preview-subject font-weight-normal mb-1">Event today</h6>
-                    <p class="text-gray ellipsis mb-0"> Just a reminder that you have an event today </p>
+                    <h6 class="preview-subject font-weight-normal mb-1">정기검진까지 10일 남았습니다.</h6>
+                    <p class="text-gray ellipsis mb-0"> 뭐 적으려면 적던가 </p>
                   </div>
                 </a>
                 <div class="dropdown-divider"></div>
@@ -194,8 +217,8 @@
                     </div>
                   </div>
                   <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                    <h6 class="preview-subject font-weight-normal mb-1">Settings</h6>
-                    <p class="text-gray ellipsis mb-0"> Update dashboard </p>
+                    <h6 class="preview-subject font-weight-normal mb-1">그래</h6>
+                    <p class="text-gray ellipsis mb-0"> 그래그래 </p>
                   </div>
                 </a>
                 <div class="dropdown-divider"></div>
@@ -206,14 +229,16 @@
                     </div>
                   </div>
                   <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                    <h6 class="preview-subject font-weight-normal mb-1">Launch Admin</h6>
-                    <p class="text-gray ellipsis mb-0"> New admin wow! </p>
+                    <h6 class="preview-subject font-weight-normal mb-1">링크같은거??</h6>
+                    <p class="text-gray ellipsis mb-0"> 모르겠다 </p>
                   </div>
                 </a>
                 <div class="dropdown-divider"></div>
-                <h6 class="p-3 mb-0 text-center">See all notifications</h6>
+                <h6 class="p-3 mb-0 text-center">{{ m_name }} 님</h6>
               </div>
             </li>
+            {% endif %}
+            <!-- 여기까지 알림 아이콘 끝 -->
           </ul>
           <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
             <span class="mdi mdi-menu"></span>
@@ -227,7 +252,7 @@
           <ul class="nav">
             <li class="nav-item nav-category"></li>
             <li class="nav-item">
-              <a class="nav-link" href="index2.html">
+              <a class="nav-link" href="/">
                 <span class="icon-bg"><i class="mdi mdi-cube menu-icon"></i></span>
                 <span class="menu-title">홈</span>
               </a>
@@ -316,19 +341,30 @@
             </li>
           </ul>
         </nav>
-        <!-- partial -->
+        
+        
+       <!-- 여기서 부터 메인 판! div태그 잘 보기 -->
         <div class="main-panel">
-          <div class="content-wrapper">
-            <div class="row" id="proBanner">
+
+          <div class="content-wrapper"> 
+                
+            
+            <div class="row" id="proBanner">              
               <div class="col-12">
                 <span class="d-flex align-items-center purchase-popup">
-                  <p>6개월 후 재검진 알림을 받으시겠습니까?</p>
+                  
+                  <p>정기검진 알림을 받으시겠습니까?</p>
                   <a href="https://github.com/BootstrapDash/ConnectPlusAdmin-Free-Bootstrap-Admin-Template" target="_blank" class="btn ml-auto download-button">네. 검진알림을 받겠습니다.</a>
                   <a href="http://www.bootstrapdash.com/demo/connect-plus/jquery/template/" target="_blank" class="btn purchase-button">아니요. 괜찮습니다.</a>
                   <i class="mdi mdi-close" id="bannerClose"></i>
+                  
                 </span>
-              </div>
+              </div>         
             </div>
+           
+            
+
+
             <div class="d-xl-flex justify-content-between align-items-start">
               <h2 class="text-dark font-weight-bold mb-2"> 검진 결과 </h2>
               <div class="d-sm-flex justify-content-xl-between align-items-center mb-2">
@@ -351,6 +387,8 @@
                 </div> -->
               </div>
             </div>
+
+
             <div class="row">
               <div class="col-md-12">
                 <div class="d-sm-flex justify-content-between align-items-center transaparent-tab-border {">

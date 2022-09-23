@@ -2,48 +2,48 @@
 <html lnag="ko">
 
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <title>네이버 회원가입</title>
-    <link rel="stylesheet" href="../../assets/css/rg.css">
-    <script src="login.js"></script>
-
+    <link rel="stylesheet" href="{% static 'css/rg.css' %}">
+	<script src="{% static 'js/login.js' %}"></script>
 </head>
 
 <body>
-
+    {% csrf_token %}
     <div class="main-signup">
         <!--웹페이지 상단-->
         <header>
             <!--LOGO-->
             <div class="logo">
-                <a href="/index.html" target="_blank" title="네이버 홈페이지"><img src="../../assets/images/reylogo.png"
+                <a href="/" target="_blank" title="네이버 홈페이지"><img src="{% static 'assets/images/reylogo.png' %}"
                         class="image"></a>
             </div>
         </header>
 
         <!--회원가입 부분-->
         <section class="signup-wrap">
-
+            <form name="f1" method="post">
             <div>
                 <!--아이디,비번,비번재확인-->
 
                 <h3>아이디</h3>
                 <span class="signup-input">
-                    <input id="signup-id" type="text"></input>
+                    <input id="signup-id" type="text" name="mem_id"></input>
                     <span class="signup-at"></span>
                 </span>
 
                 <h3>비밀번호</h3>
                 <span class="signup-input">
-                    <input id="signup-pw" type="text"></input>
+                    <input id="signup-pw" type="text" name="mem_pw"></input>
                     <span class="pw-lock"></span>
                 </span>
 
-                <h3>비밀번호 재확인</h3>
+                <!-- <h3>비밀번호 재확인</h3>
                 <span class="signup-input">
                     <input id="signup-pww" type="text"></input>
                     <span class="pww-lock"></span>
-                </span>
+                </span> -->
 
             </div>
 
@@ -51,16 +51,16 @@
                 <!--이름,생년월일,성별,이메일-->
                 <h3>이름</h3>
                 <span class="signup-input">
-                    <input id="signup-name" type="text"></input>
+                    <input id="signup-name" type="text" name="mem_name"></input>
                 </span>
 
                 <h3>생년월일</h3>
                 <span style="display: flex;">
                     <span class="signup-input-birth">
-                        <input id="signup-birth-yy" type="text" placeholder="년(4자)"></input>
+                        <input id="signup-birth-yy" type="text" placeholder="년(4자)" name="mem_birth_y"></input>
                     </span>
                     <span class="signup-input-birth" style="margin-left: 10px;">
-                        <select id="signup-birth-mm" class="selectbox" name="month" onchange="">
+                        <select id="signup-birth-mm" class="selectbox" name="mem_birth_m" onchange="">
                             <option value="month">월</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -77,13 +77,13 @@
                         </select>
                     </span>
                     <span class="signup-input-birth" style="margin-left: 10px;">
-                        <input id="signup-birth-dd" type="text" placeholder="일"></input>
+                        <input id="signup-birth-dd" type="text" placeholder="일" name="mem_birth_d"></input>
                     </span>
                 </span>
 
                 <h3>성별</h3>
                 <span class="signup-input">
-                    <select id="signup-gender" class="selectbox" name="gender" onchange="">
+                    <select id="signup-gender" class="selectbox" name="mem_gender" onchange="">
                         <option value="gender">성별</option>
                         <option value="man">남자</option>
                         <option value="woman">여자</option>
@@ -96,7 +96,7 @@
                     <!-- <span>(선택)</span> -->
                 </span>
                 <span class="signup-input">
-                    <input id="signup-email" type="text" placeholder="유형선택"></input>
+                    <input id="signup-email" type="text" placeholder="유형선택" name="mem_type"></input>
                 </span>
 
             </div>
@@ -122,14 +122,42 @@
                     <input id="signup-cnum" type="text" placeholder="인증번호 입력하세요"></input>
                 </span>
             </div> -->
-
+        </form>
             <div>
                 <!--가입하기-->
                 <div class="signup-btn-wrap">
-                    <button id="signup-btn">가입하기</button>
+                    <button id="signup-btn" type="button" onclick="memReg()">가입하기</button>
                 </div>
             </div>
+            
         </section>
+        <script>
+
+
+            function memReg() {
+                var form = document.f1;
+                if (form.mem_id.value=="") {
+                    alert("아이디를 입력해 주십시오.");
+                    form.mem_id.focus();
+                    return;
+                }
+                if (form.mem_pw.value=="") {
+                    alert("비밀번호를 입력해 주십시오.");
+                    form.mem_pw.focus();
+                    return;
+                }
+                if (form.mem_name.value=="") {
+                    alert("이름을 입력해 주십시오.");
+                    form.mem_name.focus();
+                    return;
+                }
+                form.action = "/member/register/";
+                form.submit();
+            }
+            </script>
+            {% if message %}
+            <script>alert('{{ message }}');</script>
+            {% endif %}
 
         <!--저작권 정보-->
         <footer>

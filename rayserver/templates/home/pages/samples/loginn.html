@@ -2,10 +2,11 @@
 <html lnag="ko">
 
 <head>
+	{% load static %}
 	<meta charset="UTF-8">
 	<title>네이버 로그인</title>
-	<link rel="stylesheet" href="../../assets/css/rg.css">
-	<script src="../../assets/js/login.js"></script>
+	<link rel="stylesheet" href="{% static 'css/rg.css' %}">
+	<script src="{% static 'js/login.js' %}"></script>
 
 </head>
 
@@ -23,9 +24,9 @@
 				</select>
 			</div> -->
 
-			<!--NAVER LOGO-->
+			<!-- LOGO-->
 			<div class="logo" style="margin-bottom: 40px;">
-				<a href="/index.html" target="_blank" title="네이버 홈페이지"><img src="../../assets/images/reylogo.png"
+				<a href="/" target="_blank" title="메인 페이지"><img src="{% static 'assets/images/reylogo.png' %}"
 						class="image"></a>
 			</div>
 		</header>
@@ -33,16 +34,18 @@
 		<!--로그인 부분-->
 		<section class="login-wrap">
 
+		<form method="post" name="flogin">
+			{% csrf_token %}
 			<div class="login-id-wrap">
-				<input id="input-id" placeholder="아이디" type="text"></input>
+				<input id="input-id" placeholder="아이디" type="text" name="mem_id"></input>
 			</div>
 			<div class="login-pw-wrap">
-				<input id="input-pw" placeholder="비밀번호" type="password"></input>
+				<input id="input-pw" placeholder="비밀번호" type="password" name="mem_pw"></input>
 			</div>
 			<div class="login-btn-wrap">
-				<button id="login-btn">로그인</button>
+				<input id="login-btn" type="button" value="로그인" onclick="loginChk()">
 			</div>
-			<div class="under-login">
+			<!-- <div class="under-login">
 				<span class="stay-check">
 					<input id="stay-checkbox" type="checkbox"></input>
 					<label for="stay-checkbox" id="stay-text">로그인 상태 유지</label>
@@ -52,10 +55,32 @@
 					<input id="ip-checkbox" type="checkbox" style="display:none;" onclick="ipCheck()"></input>
 					<label for="ip-checkbox">
 						<span id="ip-context">OFF</span>
-					</label>
+					</label> -->
 					<!-- IP 보안 <input class="ip-checkbox" type="checkbox" name="stay-btn" value="stay"> -->
-				</span>
-			</div>
+				<!-- </span>
+			</div> -->
+		</form>
+		<script>
+			function loginChk() {
+				var form = document.flogin;
+				if (form.mem_id.value=="") {
+					alert("회원 아이디를 입력해 주십시오.");
+					form.mem_id.focus();
+					return;
+				}
+				if (form.mem_pw.value=="") {
+					alert("비밀번호를 입력해 주십시오.");
+					form.mem_pw.focus();
+					return;
+				}
+				form.action = "/member/login/";
+				form.submit();
+			}
+			</script>
+
+{% if message %}
+<script>alert('{{ message }}');</script>
+{% endif %}
 
 		</section>
 

@@ -7399,7 +7399,7 @@ button.bg-danger:focus {
   background-color: #fb2828 !important; }
 
 .bg-light {
-  background-color:rgba(108, 71, 151, 0.5) !important; 
+  background-color:rgba(108, 71, 151, 0.7) !important; 
   }
 
 a.bg-light:hover, a.bg-light:focus,
@@ -13525,7 +13525,7 @@ dl {
         -webkit-transition-property: color;
         text-overflow: ellipsis; }
         .sidebar .nav .nav-item .nav-link .icon-bg {
-          margin-right: 0.875rem;
+          margin-right: 0.3rem;
           background: rgba(194, 244, 219, 0.12);
           height: 24px;
           width: 24px;
