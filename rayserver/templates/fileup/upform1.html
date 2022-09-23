@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>upform1.html</title>
+    <!--구글 CDN 링크 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <h1>파일 업로드 예제</h1>
+        <div id="wrap">
+            <form method="post" id="form1" enctype="multipart/form-data">
+                {% csrf_token %}
+                <p>이미지 등록</p>
+                <p><input type="file" name="file1" id="file1"></p>
+                <p><input type="button" value="등록" id="writeBtn"></p>
+            </form>
+        </div>
+    
+        <script>
+            $(function(){
+                $('#writeBtn').click(function(){
+                    $('#form1').attr('action','upload_success');
+                    $('#form1').submit();
+                });
+            });
+        </script>
+    </body>
+</html>

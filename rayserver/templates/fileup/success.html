@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>success.html</title>
+        <style>
+            image { width:300px }
+        </style>
+    </head>
+    
+    {% load static %}
+    {% static "" as baseUrl %}
+    
+    <body>
+        <img src="{{baseUrl}}/images/{{file_name}}">
+        
+        
+    </body>
+</html>

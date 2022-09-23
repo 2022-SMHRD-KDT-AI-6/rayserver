@@ -86,6 +86,15 @@ def imgtest(request):
         test = ImgSave()
         test.exam_img =  request.FILES["exam_img"]
         test.exam_result = '1'
+
+
+        if 'exam_img' in request.FILES:
+            # 파라미터 처리
+            file = request.FILES['exam_img']
+            file_name = file.name  # 첨부파일 이름
+            print(file_name)
+
+
         test.mem = user_id
         test.save()
         return render(request, 'predict/predict.html')

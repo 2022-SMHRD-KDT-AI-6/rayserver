@@ -78,6 +78,7 @@ INSTALLED_APPS = [
     'member',
     'mobile',
     'board',
+    'fileup',
 ]
 
 MIDDLEWARE = [

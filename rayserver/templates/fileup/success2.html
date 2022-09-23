@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>success2.html</title>
+        <style>
+            image { width:300px }
+        </style>
+    </head>
+    
+    {% load static %}
+    {% static "" as baseUrl %}
+    
+    <body>
+        <img src="{{baseUrl}}/images/{{file_name}}">
+        
+        <!-- ----------- 추가 ------------------- -->
+        {% if 'cat' in category %}
+        <p>위의 이미지는 {{y_predict}} 값으로 <b> 고양이 [{{category}}]</b>로 예측되었습니다.</p>
+        {% else %}
+            <p>위의 이미지는 {{y_predict}} 값으로 <b> 강아지 [{{category}}]</b>로 예측되었습니다.</p>
+        {% endif %}
+        
+        <p>
+            <input type="submit" value="파일업로드" onclick="location='main2'">
+        </p>
+        <!-- ----------- 추가 끝----------------- -->
+        </body>
+        </html>

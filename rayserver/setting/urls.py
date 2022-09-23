@@ -32,6 +32,7 @@ urlpatterns = [
     path('member/', include('member.urls')),
 
     path('board/', include('board.urls')),
+    path('fileup/', include('fileup.urls')),
     
     path('mobile/', include('mobile.urls')),
     path('admin/', admin.site.urls),
