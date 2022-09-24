@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lnag="ko">
-
 <head>
     {% load static %}
     <meta charset="UTF-8">
@@ -8,7 +7,6 @@
     <link rel="stylesheet" href="{% static 'css/rg.css' %}">
 	<script src="{% static 'js/login.js' %}"></script>
 </head>
-
 <body>
     {% csrf_token %}
     <div class="main-signup">
@@ -20,7 +18,6 @@
                         class="image"></a>
             </div>
         </header>
-
         <!--회원가입 부분-->
         <section class="signup-wrap">
             <form name="f1" method="post">
@@ -36,11 +33,11 @@
                     <input id="signup-pw" type="password" name="mem_pw"></input>
                     <span class="pw-lock"></span>
                 </span>
-                <!-- <h3>비밀번호 재확인</h3>
+                <h3>비밀번호 재확인</h3>
                 <span class="signup-input">
-                    <input id="signup-pww" type="text"></input>
+                    <input id="signup-pww" type="text" name="mem_pw2"></input>
                     <span class="pww-lock"></span>
-                </span> -->
+                </span>
             </div>
             <div style="margin-top: 35px;">
                 <!--이름,생년월일,성별,이메일-->
@@ -151,6 +148,9 @@
             {% if message %}
             <script>alert('{{ message }}');</script>
             {% endif %}
+
+
+
 
         <!--저작권 정보-->
         <footer>
