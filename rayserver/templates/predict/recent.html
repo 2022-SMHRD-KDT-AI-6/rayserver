@@ -1,0 +1,14 @@
+<body>
+    {% csrf_token %}
+    <h1>어서오세요</h1>
+    {% comment %} {% for class in class_object %}
+        <h1>{{class.exam_result}}반</h1> 
+        </br>
+    {% endfor %} {% endcomment %}
+
+    <h1>111님의 아이디님의 데이터는</h1>
+    {{class_object.exam_img.url}}
+    <img src="{{class_object.exam_img.url}}" width="500" height="500">
+    <h1>{{class_object.exam_result}}점</h1> 
+
+</body>

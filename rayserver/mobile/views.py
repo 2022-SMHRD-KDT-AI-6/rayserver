@@ -65,6 +65,20 @@ class ImageScore(APIView):
         test.save()
         return Response(dict(msg="이미지저장완료", code="200",score=1))
 
+class ScoreData(APIView):
+    def post(self, request):
+        print("로그:"+str(request.body))
+        mem_id = request.data.get('mem_id', "")
+        class_object = ImgSave.objects.filter(mem_id=mem_id).order_by('-mem_seq')[0]
+        return Response(dict(msg="이미지저장완료", code="200",imgurl=class_object.exam_img.url, score=class_object.exam_result))
+        
+# {{class_object.exam_img.url}}
+# Create your views here.
+def scoredata2(request):
+    class_object = ImgSave.objects.filter(mem_id="111").order_by('-mem_seq')[0]
+    return render(request, 'predict/recent.html', {'class_object': class_object})   
+
+
 
 def imgtest2(request):
     if request.method == "POST":

@@ -84,6 +84,7 @@ def member_login(request):
             context['m_name'] = rs.mem_name
             context['message'] = rs.mem_name + "님이 로그인하셨습니다."
             return render(request, 'home/index.html', context)
+            # return redirect('/',context)
         else:
             context['message'] = "로그인 실패. 패스워드 불일치\\n\\n확인하신 후 다시 시도해 주십시오."
             return render(request, 'home/pages/samples/loginn.html', context)
