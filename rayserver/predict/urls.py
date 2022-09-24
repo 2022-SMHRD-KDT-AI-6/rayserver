@@ -14,7 +14,10 @@ urlpatterns = [
     path('postcreate', views.postcreate, name='postcreate'),
     path('detail', views.detail, name='detail'),
     
-
+    path('scoretest', views.scoredata2, name='scoretest'),
     path('imgtest', views.imgtest, name='imgtest'),
+
+
+
     # path('upload',views.upload, name='upload'),
 ]
