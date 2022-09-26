@@ -199,7 +199,7 @@ def imgtest(request):
             imgsave.exam_result = raypredict
         else:
             file_name = '-'
-        board = ImgSave.objects.filter(mem_id="111").order_by('-mem_seq')[0]
+        board = ImgSave.objects.filter(mem_id=mem_id).order_by('-mem_seq')[0]
         board.exam_result = raypredict
         board.save()
         return render(request, 'predict/predict.html')
