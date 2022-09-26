@@ -1,28 +1,25 @@
 {% extends "include/base.html" %}
 {% comment %} {% extends 'predict/메인.html'%} {% endcomment %}
 {% load static %}
-{% block content %}
+{% block main_area %}
 
 <div class="row">
     {% for product in products %}
     <div class="col-lg-4">
         <div class= "box">
-        {% comment %} <img width=100% src="{{product.imageURL}}"> {% endcomment %}
+            {% if 'm_id' in request.session %}
+            검사아이디 = {{request.session.m_id}}
+            {% endif %}
+        <h3>검사번호 : {{product.mem_seq}}</h3>
         <img src="{{product.exam_img.url}}" width="500" height="500">
-        {{product.exam_img.name}}
-        <h6><strong>{{product.exam_result}}</strong></h6>
-        {{product.exam_img.url}}
-        
-        {% comment %} {{product.description}} {% endcomment %}
-        <hr>
-        {% comment %} <button data-product={{product.id}} data-action="add" class="btn btn-success 장바구니업데이트">장바구니 담기</button> {% endcomment %}
+        <h6 style="display: inline-block; float: right"><strong>검사아이디 : {{product.mem_id}}</strong></h6>
+        <h6>검사날짜 : {{product.exam_date}}</h6>
         <a href="product/{{product.pk}}" class="btn btn-success">보기</a>
-        <h4 style="display: inline-block; float: right"><strong>${{product.price|floatformat:2}}</strong></h4>
-				
+        <h6 style="display: inline-block; float: right"><strong>검사결과 : {{product.exam_result}}</strong></h6>
         </div>
-       
+        <br>
     </div>
     {% endfor %} 
 </div>
-{% endblock content %}
+{% endblock main_area %}
 

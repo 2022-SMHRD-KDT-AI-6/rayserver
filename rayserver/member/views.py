@@ -28,9 +28,6 @@ def member_reg(request):
         mem_birth_m = request.POST["mem_birth_m"]
         mem_birth_d = request.POST["mem_birth_d"]
         mem_birth = mem_birth_y+"-"+mem_birth_m+"-"+mem_birth_d
-
-
-
         mem_gender = request.POST["mem_gender"]
         mem_type = request.POST["mem_type"]
         mem_pw_crypted = make_password(mem_pw)    # 암호화

@@ -34,11 +34,19 @@ class StoreView(TemplateView):
         context = super().get_context_data(**kwargs)
         # Data = 장바구니데이타(self.request)
         # cartItems = Data['cartItems']
-        products = ImgSave.objects.all().order_by('-mem_seq')
+        # products = ImgSave.objects.all().order_by('-mem_seq')
+        # request.session['m_id'] = mem_id
+        # mem_id = request.session.get('m_id', '')
+        # print('a :  '+context['m_id'])
+        mem_id = self.request.session.get("m_id")
+        products = ImgSave.objects.filter(mem_id=mem_id).order_by('-mem_seq')
         context['products'] = products
         # context['cartItems'] = cartItems
         print(context)
+        
+        
         return context
+ 
 
 class ProductDetailView(DetailView):
     template_name = "predict/product_detail.html"

@@ -1,6 +1,6 @@
-{% comment %} {% extends 'store/메인.html'%} {% endcomment %}
+{% extends "include/base.html" %}
 {% load static %}
-{% block content %}
+{% block main_area %}
 <script>
   {% comment %} console.log({{ product }}) {% endcomment %}
 </script>
@@ -99,4 +99,4 @@
       <!--container.//-->
       </article>
         </div>
-{% endblock content %}
+{% endblock main_area %}
