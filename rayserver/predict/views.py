@@ -139,8 +139,8 @@ categories = ["36.0","35.5","35.0","34.5","34.0","33.5","33.0","32.5","32.0","31
 
 
 def Dataization(img_path):
-    image_h = 28
-    image_w = 28
+    image_h = 224
+    image_w = 224
     img = cv2.imread(img_path)
     k = np.array([[1,1,1],[1,1,1],[1,1,1]]) * (1/9)
     # 미디언 블러 처리
@@ -190,9 +190,11 @@ def imgtest(request):
             test.append(Dataization(image_dir + file_name))
             test = np.array(test)
             model = load_model('model.h5')
+
             y_prob = model.predict(test, verbose=0) 
             predict = y_prob.argmax(axis=-1)
             raypredict = categories[predict[0]]
+
             print("예측 : "+ raypredict)
             imgsave.exam_result = raypredict
         else:
