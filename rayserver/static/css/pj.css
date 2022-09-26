@@ -1,0 +1,71 @@
+#pi{
+    width: 100%;
+    margin: 0 auto;
+    background-image: url(../assets/images/보라이미지.jpg);
+    height: 250px;
+    color: #fff;
+    background-position: center;
+}
+.pp{
+    padding: 100px 0;
+    font-size: 40px;
+
+    display: block;
+    text-align: center;
+    font-weight: 600;
+    line-height: 1.6;
+
+}
+p {
+    margin: 0 0 15px;
+}
+
+* {
+	font-family: 'BMJUA';
+}
+
+/* @font-face  {
+    font-family: 'BMJUA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+} */
+
+img {
+    height: auto;
+    max-width: 100%;
+    vertical-align: middle;
+    border: 0;
+
+}
+h1 {
+    color: #6C4797;
+}
+/* #sbsb {
+    box-sizing: inherit;
+    display: block;
+    background-image: url(./뉴로젠소개.png);
+
+} */
+
+.radius_img_1 {    border-radius: 50%;} 
+.radius_img_2 {    border-radius: 20%;} 
+/* div {    width: 300px;    float: left;    border: 1px solid;} */
+
+.my_div1 {
+    width: 300px;   
+    float: left;    
+    border: 1px solid;
+}
+
+.my_div2 {
+    width: 300px;   
+    float: left;    
+    border: 1px solid;
+}
+
+.my_div3 {
+    width: 300px;   
+    float: left;    
+    border: 1px solid;
+}

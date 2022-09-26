@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>기억할레이</title>
+    
+    
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+<link rel="stylesheet" href="{% static 'css/pj.css' %}" />
+<link rel="stylesheet" href="{% static 'assets/images/reyhlg22.png' %}" />
+
+<link rel="stylesheet" href="{% static 'assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css' %}" />
+<link rel="stylesheet" href="{% static 'assets/vendors/css/vendor.bundle.base.css' %}" />
+<link rel="stylesheet" href="{% static 'assets/vendors/flag-icon-css/css/flag-icon.min.css' %}" />
+<link rel="stylesheet" href="{% static 'assets/vendors/mdi/css/materialdesignicons.min.css' %}" />
+
+  </head>
+
+
+<!-- ============================================================================================ -->
+
+<body>
+  <div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        <a class="navbar-brand brand-logo" href="/"><img src="{% static 'assets/images/reylogo.png' %}"/></a>
+        <!-- <a class="navbar-brand brand-logo-mini" href="index.html"><img src="assets/images/logo-mini.svg" alt="logo" /></a> -->
+        <a class="navbar-brand brand-logo-mini" href="/"><img src="{% static 'assets/images/reyhlg.png' %}"/></a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-stretch">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+          <span class="mdi mdi-menu"></span>
+        </button>
+        <div class="search-field d-none d-xl-block">
+          <form class="d-flex align-items-center h-100" action="#">
+            <div class="input-group">
+              <div class="input-group-prepend bg-transparent">
+                <i class="input-group-text border-0 mdi mdi-magnify"></i>
+              </div>
+              <input type="text" class="form-control bg-transparent border-0" placeholder="결과 검색">
+            </div>
+          </form>
+        </div>
+        <ul class="navbar-nav navbar-nav-right">
+          <!-- <li class="nav-item  dropdown d-none d-md-block">
+            <a class="nav-link dropdown-toggle" id="reportDropdown" href="#" data-toggle="dropdown" aria-expanded="false"> 결과 다운받기</a>
+            <div class="dropdown-menu navbar-dropdown" aria-labelledby="reportDropdown">
+              <a class="dropdown-item" href="#">
+                <i class="mdi mdi-file-pdf mr-2"></i>PDF </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">
+                <i class="mdi mdi-file-excel mr-2"></i>Excel </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">
+                <i class="mdi mdi-file-word mr-2"></i>doc </a>
+            </div>
+          </li> -->
+         
+       
+          <li class="nav-item nav-profile dropdown">
+            <a class="nav-link dropdown-toggle" id="profileDropdown" href="/pages/samples/loginn.html" data-toggle="dropdown" aria-expanded="false">
+              
+              <div class="nav-profile-text">
+                <p class="mb-1 text-black">로그인
+                </p>
+              </div>
+            </a>
+            <div class="dropdown-menu navbar-dropdown dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="profileDropdown" data-x-placement="bottom-end">
+              <div class="p-2">
+                <h5 class="dropdown-header text-uppercase pl-2 text-dark">사용자</h5>
+                <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="#">
+                  <span>쪽지</span>
+                  <span class="p-0">
+                    <span class="badge badge-primary">3</span>
+                    <i class="mdi mdi-email-open-outline ml-1"></i>
+                  </span>
+                </a>
+                <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="#">
+                  <span>이용정보</span>
+                  <span class="p-0">
+                    <span class="badge badge-success">1</span>
+                    <i class="mdi mdi-account-outline ml-1"></i>
+                  </span>
+                </a>
+                <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                  <span>설정</span>
+                  <i class="mdi mdi-settings"></i>
+                </a>
+                <div role="separator" class="dropdown-divider"></div>
+
+
+
+                <!-- 여기가 구분선 -->
+                <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="#">
+                  <span>로그인 유지</span>
+                  <i class="mdi mdi-lock ml-1"></i>
+                </a>
+                <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="/pages/samples/loginn.html">
+                  <span>로그인</span>
+                  <i class="mdi mdi-logout ml-1"></i>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+           
+
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
+              <h6 class="p-3 mb-0 bg-primary text-white py-4">Messages</h6>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item preview-item">
+                <div class="preview-thumbnail">
+                  <img src="assets/images/faces/face4.jpg" alt="image" class="profile-pic">
+                </div>
+                <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                  <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Mark send you a message</h6>
+                  <p class="text-gray mb-0"> 1 Minutes ago </p>
+                </div>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item preview-item">
+                <div class="preview-thumbnail">
+                  <img src="assets/images/faces/face2.jpg" alt="image" class="profile-pic">
+                </div>
+                <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                  <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Cregh send you a message</h6>
+                  <p class="text-gray mb-0"> 15 Minutes ago </p>
+                </div>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item preview-item">
+                <div class="preview-thumbnail">
+                  <img src="assets/images/faces/face3.jpg" alt="image" class="profile-pic">
+                </div>
+                <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                  <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Profile picture updated</h6>
+                  <p class="text-gray mb-0"> 18 Minutes ago </p>
+                </div>
+              </a>
+              <div class="dropdown-divider"></div>
+              <h6 class="p-3 mb-0 text-center">4 new messages</h6>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
+              <i class="mdi mdi-bell-outline"></i>
+              <span class="count-symbol bg-danger"></span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+              <h6 class="p-3 mb-0 bg-primary text-white py-4">Notifications</h6>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item preview-item">
+                <div class="preview-thumbnail">
+                  <div class="preview-icon bg-success">
+                    <i class="mdi mdi-calendar"></i>
+                  </div>
+                </div>
+                <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                  <h6 class="preview-subject font-weight-normal mb-1">Event today</h6>
+                  <p class="text-gray ellipsis mb-0"> Just a reminder that you have an event today </p>
+                </div>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item preview-item">
+                <div class="preview-thumbnail">
+                  <div class="preview-icon bg-warning">
+                    <i class="mdi mdi-settings"></i>
+                  </div>
+                </div>
+                <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                  <h6 class="preview-subject font-weight-normal mb-1">Settings</h6>
+                  <p class="text-gray ellipsis mb-0"> Update dashboard </p>
+                </div>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item preview-item">
+                <div class="preview-thumbnail">
+                  <div class="preview-icon bg-info">
+                    <i class="mdi mdi-link-variant"></i>
+                  </div>
+                </div>
+                <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                  <h6 class="preview-subject font-weight-normal mb-1">Launch Admin</h6>
+                  <p class="text-gray ellipsis mb-0"> New admin wow! </p>
+                </div>
+              </a>
+              <div class="dropdown-divider"></div>
+              <h6 class="p-3 mb-0 text-center">See all notifications</h6>
+            </div>
+          </li>
+        </ul>
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+          <span class="mdi mdi-menu"></span>
+        </button>
+      </div>
+    </nav>
+
+
+
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+          <li class="nav-item nav-category"></li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">
+              <span class="icon-bg"><i class="mdi mdi-cube menu-icon"></i></span>
+              <span class="menu-title">홈</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+              <span class="icon-bg"><i class="mdi mdi-crosshairs-gps menu-icon"></i></span>
+              <span class="menu-title">프로젝트 소개</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-basic">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="introrey">레이프로젝트</a></li>
+                <li class="nav-item"> <a class="nav-link" href="introcom">(주)뉴로젠</a></li>
+                <li class="nav-item"> <a class="nav-link" href="introteam">기억할레이</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pages/icons/mdi.html">
+              <span class="icon-bg"><i class="mdi mdi-contacts menu-icon"></i></span>
+              <span class="menu-title">레이도형 영역별 소개</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pages/forms/basic_elements.html">
+              <span class="icon-bg"><i class="mdi mdi-format-list-bulleted menu-icon"></i></span>
+              <span class="menu-title">내 주변 치매센터 정보</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pages/charts/chartjs.html">
+              <span class="icon-bg"><i class="mdi mdi-chart-bar menu-icon"></i></span>
+              <span class="menu-title">검사 분석 결과</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pages/tables/basic-table.html">
+              <span class="icon-bg"><i class="mdi mdi-table-large menu-icon"></i></span>
+              <span class="menu-title">전체
+                 비교</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+              <span class="icon-bg"><i class="mdi mdi-lock menu-icon"></i></span>
+              <span class="menu-title">회원 정보</span>
+              <i class="menu-arrow"></i>
+            </a>
+            
+            <div class="collapse" id="auth">
+              <ul class="nav flex-column sub-menu">
+                <!-- <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html"> Blank Page </a></li> -->
+                <li class="nav-item"> <a class="nav-link" href="pages/samples/loginn.html"> Login </a></li>
+                <!-- <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> 404 </a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> 500 </a></li>
+              </ul> -->
+            </div>
+          </li>
+          <!-- 도큐먼트 클릭부분 -->
+          <li class="nav-item documentation-link">
+            <a class="nav-link" href="https://www.nid.or.kr/main/main.aspx" target="_blank">
+              <span class="icon-bg">
+                <i class="mdi mdi-file-document-box menu-icon"></i>
+              </span>
+              <span class="menu-title">중앙치매센터</span>
+            </a>
+          </li>
+
+
+         <!-- 옆 세팅, 로그아웃버튼 부분 -->
+          <li class="nav-item sidebar-user-actions">
+            <div class="sidebar-user-menu">
+              <a href="#" class="nav-link"><i class="mdi mdi-settings menu-icon"></i>
+                <span class="menu-title">설정</span>
+              </a>
+            </div>
+          </li>
+         
+          <!-- <li class="nav-item sidebar-user-actions">
+            <div class="sidebar-user-menu">
+              <a href="/pages/samples/loginn.html" class="nav-link"><i class="mdi mdi-logout menu-icon"></i>
+                <span class="menu-title">로그아웃</span></a>
+            </div>
+          </li> -->
+        </ul>
+      </nav>
+
+
+      <!-- partial -->
+      <!-- 여기가 회색바탕 감싸고 있는 메인 페이지 시작이고 -->
+      <div class="main-panel">
+        <!-- <h1>여기에 넣으면 깨지고</h1> -->
+<!-- ======================================== -->
+      
+        <!-- 여기가 회색바탕에 들어가는 메인페이지임 -->
+        <div class="content-wrapper">
+          <div id="pi">
+          <p class="pp">
+            프로젝트 소개
+
+          </p>
+        </div>
+          <div id="sbsb">
+            
+            <center>
+              <br><br>
+              <h1>기억할레이</h1> <br>
+          <img id="imgsb" src="{% static 'assets/images/rey.png' %}" />
+          <br><br>
+          <h4>레이 복합도형검사 데이터 학습을 통한 점수 분석 시스템</h4>
+        
+
+          <!-- <br><br><br><br>
+          <h3>[개발목표]</h3>
+          <ul type="square">
+          
+            <li> 뇌졸증 환자는 인지 기능이 손상되는데, 일상에 필요한 언어 기능, 기억력, 주의력, 시공간 능력, 전두엽 집행 및 실행 기능이 떨어진다.</li>
+            <li> 이 중 시공간 능력을 레이 복합도형검사(지연 회상)를 통해 기능저하에 대한 판별을 세부점수화 할 수 있는 예측 모델을 개발하고자 함.</li>
+    
+          </ul> -->
+          
+          <br> <br> <br>
+
+          <img id="imgsb" src="{% static 'assets/images/프젝소개.png' %}" width="900" height="900" />
+          <br> <br> <br>
+          <!-- <img id="imgsb" src="./개발내용2.png" style="display: block; margin: 0.5 auto;" />
+          <br> <br> <br>
+          <img id="imgsb" src="./필요기술.png" style="display: block; margin: 0 auto;" /> -->
+
+        </center>
+        </div>
+
+
+
+
+
+          <!-- <br> <br> <br>
+          <h3>[레이프로젝트]</h3>
+          <li>여기에 사진이랑 소개 좀 넣고</li>
+          <ul type="square">
+            <li></li>
+          </ul>
+
+          <h3>[팀원 소개]</h3>
+          <li>여기에 사진이랑 소개 좀 넣고</li>
+          <H3>사용 기술</H3>
+          <li>사용기술이랑 정리하고</li> -->
+
+
+
+
+          <!-- <br> <br> <br>
+          <img id="imgsb" src="./뉴로젠2.png"/>
+          <br> <br> <br>
+          <img id="imgsb" src="./뉴로젠.png"/> -->
+        
+       
+  
+          
+        </div> 
+        <!-- 여기가 메인페이지 끝 -->
+
+
+        <!-- content-wrapper ends -->
+         <!-- partial:partials/_footer.html -->
+         <footer class="footer">
+          <div class="footer-inner-wraper">
+            <div class="d-sm-flex justify-content-center justify-content-sm-between">
+              <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">기억할레이</span>
+              <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> 팀장 : 최대열 / 팀원 : 김은영, 김준호, 이수빈</span>
+              <!-- <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboard templates</a> from Bootstrapdash.com</span> -->
+            </div>
+          </div>
+        </footer>
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+
+
+        
+       
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <script src="{% static 'assets/vendors/js/vendor.bundle.base.js' %}"></script>
+  
+  <script src="{% static 'js/Chart.min.js' %}"></script>
+  <script src="{% static 'assets/vendors/jquery-circle-progress/circle-progress.min.js' %}"></script>
+  
+  <script src="{% static 'js/off-canvas.js' %}"></script>
+  <script src="{% static 'js/hoverable-collapse.js' %}"></script>
+  <script src="{% static 'js/misc.js' %}"></script>
+  
+  <script src="{% static 'js/dashboard.js' %}"></script>
+</body>
+</html>
