@@ -17,6 +17,33 @@ def home(request):
 def predict(request):
     return render(request, 'predict/predict.html')
 
+from django.views.generic import CreateView, DetailView,TemplateView,View
+
+
+class StoreView(TemplateView):
+    template_name = "predict/all.html"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Data = 장바구니데이타(self.request)
+        # cartItems = Data['cartItems']
+        products = ImgSave.objects.all().order_by('-mem_seq')
+        context['products'] = products
+        # context['cartItems'] = cartItems
+        print(context)
+        return context
+
+class ProductDetailView(DetailView):
+    template_name = "predict/product_detail.html"
+    queryset = ImgSave.objects.all().order_by('-mem_seq')
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Data = 장바구니데이타(self.request)
+        # cartItems = Data['cartItems']
+        # context['cartItems'] = cartItems
+        print(context)
+        return context
+
+
 def scoredata(request):
     query_set = ImgSave.objects.first()
     obj= ImgSave.objects.filter(id=1).order_by('-id')[0]
@@ -87,13 +114,6 @@ def postcreate(request):
     blog.save()
     # return redirect("user:raylogin" + str(blog.id))
     return redirect("detail/"+str(blog.id))
-
-
-        #       {% if not 'm_id' in request.session %}
-        #       <a href="/member/register">[회원가입]</a><br>
-        #       <a href="/member/login">[로그인]</a>
-        #   {% else %}
-        #       {{ m_name }} 님 어서오세요.
 
 
 # 업로드 링크
