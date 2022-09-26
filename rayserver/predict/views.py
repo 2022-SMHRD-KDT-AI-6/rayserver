@@ -43,8 +43,6 @@ class StoreView(TemplateView):
         context['products'] = products
         # context['cartItems'] = cartItems
         print(context)
-        
-        
         return context
  
 
