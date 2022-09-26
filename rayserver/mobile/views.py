@@ -6,6 +6,12 @@ from django.contrib.auth.hashers import make_password, check_password
 from rest_framework.response import Response
 from datetime import datetime
 from predict.models import ImgSave
+from keras.models import load_model
+import os, re, glob
+import cv2
+import numpy as np
+import shutil
+from numpy import argmax
 
 # 어플
 class MobileLogin(APIView):
@@ -51,11 +57,7 @@ class MobileRegist(APIView):
             context['message'] = mem_name + "님 회원가입 되었습니다."
             return Response(dict(msg="회원가입성공", code="200"))
 
-import os, re, glob
-import cv2
-import numpy as np
-import shutil
-from numpy import argmax
+
 
 from matplotlib import pyplot as plt 
 # 업로드 링크
@@ -140,10 +142,13 @@ class ImageScore(APIView):
             print(raypredict)
         else:
             file_name = '-'
+        
         scoreSave = ImgSave.objects.filter(mem_id=mem_id).order_by('-mem_seq')[0]
         scoreSave.exam_result = raypredict
         scoreSave.save()
         return Response(dict(msg="이미지저장완료", code="200",score=raypredict))
+
+
 
 class ScoreData(APIView):
     def post(self, request):
@@ -152,26 +157,6 @@ class ScoreData(APIView):
         class_object = ImgSave.objects.filter(mem_id=mem_id).order_by('-mem_seq')[0]
         return Response(dict(msg="이미지저장완료", code="200",imgurl=class_object.exam_img.url, score=class_object.exam_result))
         
-# {{class_object.exam_img.url}}
-# Create your views here.
-def scoredata2(request):
-    class_object = ImgSave.objects.filter(mem_id="111").order_by('-mem_seq')[0]
-    return render(request, 'predict/recent.html', {'class_object': class_object})   
 
-
-
-def imgtest2(request):
-    if request.method == "POST":
-        mem_id = request.POST["mem_id"]
-        user_id = Members.objects.get(pk=mem_id)
-        print(user_id)
-        test = ImgSave()
-        test.exam_img =  request.FILES["exam_img"]
-        test.exam_date = datetime.now()
-        test.exam_result = '1'
-        test.mem = user_id
-        test.save()
-        return render(request, 'predict/predict.html')
-    return render(request, 'predict/imgtest.html')
 
 
