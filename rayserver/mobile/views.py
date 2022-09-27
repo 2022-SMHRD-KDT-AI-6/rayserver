@@ -32,6 +32,21 @@ class MobileLogin(APIView):
             print("실패")
             return Response(dict(msg="로그인 실패. 패스워드 불일치", code="400"))
 
+class MobileShowMember(APIView):
+    def post(self, request):
+        print("로그 : " +str(request.body))
+        mem_id = request.data.get('mem_id',"")
+        user = Members.objects.filter(mem_id=mem_id).first()
+        data = dict(
+            mem_id=user.mem_id, 
+            mem_name=user.mem_name,
+            mem_birth = user.mem_birth,
+            mem_gender = user.mem_gender,
+            mem_joindate =user.mem_joindate,
+            mem_type = user.mem_type
+            )
+        return Response(data)
+
 
 class MobileRegist(APIView):
     def post(self, request):

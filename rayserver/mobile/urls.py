@@ -1,6 +1,6 @@
 from django.conf.urls import include
 from django.urls import path
-from .views import MobileLogin, MobileRegist, ImageScore, ScoreData
+from .views import MobileLogin, MobileRegist, ImageScore, MobileShowMember, ScoreData
 
 
 from . import views
@@ -11,5 +11,6 @@ urlpatterns = [
     path('regist', MobileRegist.as_view(), name='regist'),
     path('score', ImageScore.as_view(), name='score'),
     path('scoredata', ScoreData.as_view(), name='scoredata'),
+    path('showmember', MobileShowMember.as_view(), name='showmember'),
 ]
 
