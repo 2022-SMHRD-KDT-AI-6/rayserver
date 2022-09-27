@@ -38,6 +38,7 @@ class StoreView(TemplateView):
         # mem_id = request.session.get('m_id', '')
         # print('a :  '+context['m_id'])
         mem_id = self.request.session.get("m_id")
+        
         products = ImgSave.objects.filter(mem_id=mem_id).order_by('-mem_seq')
         context['products'] = products
         # context['cartItems'] = cartItems

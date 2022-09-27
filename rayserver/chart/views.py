@@ -9,7 +9,6 @@ def chart_bar(request):
         'chartdata':imgdata
     })
 
-
 def chart_bar2(request):
     import psycopg2
     dbCon = psycopg2.connect('localhost', 'root', '1234', 'raydb')
@@ -59,7 +58,7 @@ def chartShow(request):
     context = {'avg' : avg}
     return render(request,'chart/chart_example.html', context)
     
-
+from member.models import Members
 from django.views import View
 class ChartView(View):
     def get(self, request):
@@ -79,5 +78,18 @@ class ChartView(View):
         print(cnt)
         avg = num/cnt
         print(avg)
-        # return HTTPResponse(avg)
+        mem_id = self.request.session.get("m_id")
+        
+        object2 = Members.objects.filter(mem_gender='m')
+        
+        
+        cnt2=0
+        for i in object2:
+            print(i.mem_id)
+            cnt2+=1
+        print('남자수')
+        print(cnt2)
+
+        # object4 = object.union(object2)
+        # print(object4)
         return JsonResponse({"results":results},status=200)
