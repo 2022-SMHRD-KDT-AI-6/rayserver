@@ -1,4 +1,3 @@
-
 from fileinput import filename
 from .models import ImgSave, Post, Test, Test2, Test3
 from django.shortcuts import render, redirect
@@ -44,8 +43,6 @@ class StoreView(TemplateView):
         # context['cartItems'] = cartItems
         print(context)
         return context
- 
-
 class ProductDetailView(DetailView):
     template_name = "predict/product_detail.html"
     queryset = ImgSave.objects.all().order_by('-mem_seq')
@@ -56,8 +53,6 @@ class ProductDetailView(DetailView):
         # context['cartItems'] = cartItems
         print(context)
         return context
-
-
 def scoredata(request):
     query_set = ImgSave.objects.first()
     obj= ImgSave.objects.filter(id=1).order_by('-id')[0]
@@ -210,4 +205,3 @@ def imgtest(request):
         board.save()
         return render(request, 'predict/predict.html')
     return render(request, 'predict/imgtest.html')
-
