@@ -34,6 +34,7 @@ urlpatterns = [
     path('board/', include('board.urls')),
     path('fileup/', include('fileup.urls')),
     
+    path('chart/', include('chart.urls')),
     path('mobile/', include('mobile.urls')),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
