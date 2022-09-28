@@ -119,13 +119,42 @@ def chart_bar3(request):
                 "score":i[0]
             })
         avg = int(num/cnt)
+        print(avg)
         
         # 남자 중에서 전체 평균구하기
-        cursor.execute("SELECT mem_id FROM t_member")
-        mem_id = cursor.fetchall()
+        cursor.execute("SELECT m.mem_id, m.mem_gender, e.exam_result FROM t_member as m join t_exam as e on m.mem_id = e.mem_id where m.mem_gender = 'm'")
+        menscores = cursor.fetchall()
+        num2=0
+        cnt2=0
+        for i in menscores:
+            if i[2] == "":
+                pass
+            else:
+                cnt2 +=1
+                num2 += float(i[2])
+        manavg = int(num2/cnt2)
+        print('남자평균')
+        print(manavg)
+
+        # 여자 중에서 전체 평균구하기
+        cursor.execute("SELECT m.mem_id, m.mem_gender, e.exam_result FROM t_member as m join t_exam as e on m.mem_id = e.mem_id where m.mem_gender = 'w'")
+        womencores = cursor.fetchall()
+        num3=0
+        cnt3=0
+        for i in womencores:
+            if i[2] == "":
+                pass
+            else:
+                num3 +=1
+                cnt3 += float(i[2])
+        # womanavg = int(num3/cnt3)
+        print('여자평균')
+        # print(womanavg)
+
+
         context = {
             'avg' : avg,
             'scores' : scores,
-            'mem_id': mem_id
+            'manavg': manavg
             }
     return render(request, "chart/chart_example.html", context)
