@@ -35,3 +35,5 @@ class Members(models.Model):
         return '이름:' + self.mem_name + ", 성별: "+self.mem_gender
 
 
+
+

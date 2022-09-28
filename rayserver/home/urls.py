@@ -1,6 +1,6 @@
 from unicodedata import name
 from django.urls import path
-from .views import imgresult_view, index, home_view, introcom_view, introrey_view, introteam_view,ChartView
+from .views import imgresult_view, index, home_view, introcom_view, introrey_view, introteam_view,ChartView, chart_bar3
 
 app_name = "home"
 
@@ -13,4 +13,5 @@ urlpatterns = [
     path('introteam', introteam_view, name='introteam'),
     path('view',ChartView.as_view(),name='view'),
     path('imgresult', imgresult_view, name='imgresult'),
+    path('test', chart_bar3, name='test')
 ]

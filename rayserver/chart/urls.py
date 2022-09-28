@@ -12,4 +12,5 @@ urlpatterns = [
     path('', views.chartShow, name='chart'),
     path('chart3', views.chart_bar3, name='chart3'),
     path('chartview', views.ChartView.as_view(), name='chartview')
+    
 ]
