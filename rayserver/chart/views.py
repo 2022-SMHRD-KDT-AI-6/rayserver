@@ -24,6 +24,9 @@ def chart_bar2(request):
         'dtitle2' : '예측',
         'rsSales' : rsSales
     })
+import psycopg2
+
+
 
 from rest_framework.views import APIView
 from rest_framework.response import Response    
@@ -93,3 +96,36 @@ class ChartView(View):
         # object4 = object.union(object2)
         # print(object4)
         return JsonResponse({"results":results},status=200)
+
+
+
+def chart_bar3(request):
+    dbCon = psycopg2.connect(dbname="raydb", user="root", password="1234")
+    cursor = dbCon.cursor()
+    with dbCon:
+        # 전체 평균구하기
+        cursor.execute("SELECT exam_result FROM t_exam")
+        scores = cursor.fetchall()
+        results = []
+        num = 0
+        cnt = 0
+        for i in scores:
+            if i[0] == "":
+                pass
+            else:
+                cnt += 1
+                num += float(i[0])
+                results.append({
+                "score":i[0]
+            })
+        avg = int(num/cnt)
+        
+        # 남자 중에서 전체 평균구하기
+        cursor.execute("SELECT mem_id FROM t_member")
+        mem_id = cursor.fetchall()
+        context = {
+            'avg' : avg,
+            'scores' : scores,
+            'mem_id': mem_id
+            }
+    return render(request, "chart/chart_example.html", context)
