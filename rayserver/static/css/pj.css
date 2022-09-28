@@ -20,8 +20,10 @@ p {
     margin: 0 0 15px;
 }
 
+   
 * {
 	font-family: 'BMJUA';
+   
 }
 
 /* @font-face  {
@@ -68,3 +70,4 @@ h1 {
 .a11 .a22 .a33 .a44 {
 margin-left: 10px;
 }
+
