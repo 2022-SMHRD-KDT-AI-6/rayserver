@@ -97,6 +97,7 @@ class ChartView(View):
         # print(object4)
         return JsonResponse({"results":results},status=200)
 
+from datetime import datetime
 
 
 def chart_bar3(request):
@@ -150,6 +151,10 @@ def chart_bar3(request):
         # womanavg = int(num3/cnt3)
         print('여자평균')
         # print(womanavg)
+
+        # 20대 이상중에서 전체 평균구하기
+        cursor.execute("SELECT m.mem_id, m.mem_joindate, e.exam_result FROM t_member as m join t_exam as e on m.mem_id = e.mem_id")
+        year = datetime.today().year
 
 
         context = {
