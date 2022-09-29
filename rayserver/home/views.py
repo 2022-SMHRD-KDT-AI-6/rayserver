@@ -15,7 +15,7 @@ def index(request):
     # m_id 세션변수 값이 없다면 '' 을 넣어라
     context['m_id'] = request.session.get('m_id', '')
     context['m_name'] = request.session.get('m_name', '')
-    return render(request, 'home/index.html', context)
+    return render(request, 'home/index3.html', context)
 
 
 
@@ -104,7 +104,10 @@ def chart_view(request):
                 })
             else:
                 print('a')
-        avg = int(num/cnt)
+        if num != 0:
+            avg = int(num/cnt)
+        else:
+            avg = 0
         print(avg)
         
         # 남자 중에서 전체 평균구하기
@@ -121,7 +124,10 @@ def chart_view(request):
                 results.append({
                 "menscore":i[2]
             })
-        manavg = int(num2/cnt2)
+        if num2 != 0:
+            manavg = int(num2/cnt2)
+        else:
+            manavg = 0
         print('남자평균')
         print(manavg)
 
@@ -139,7 +145,10 @@ def chart_view(request):
                 results.append({
                 "womanscore":i[2]
             })
-        womanavg = int(num3/cnt3)
+        if num3 != 0:
+            womanavg = int(num3/cnt3)
+        else:
+            womanavg = 0
         print('여자평균')
         print(womanavg)
 
@@ -160,7 +169,11 @@ def chart_view(request):
                 results.append({
                 "sixscore":i[2]
             })
-        sixavg = int(num4/cnt4)
+        if num4 !=0:
+            sixavg = int(num4/cnt4)
+        else:
+            sixavg = 0
+
         print('60대평균')
         print(sixavg)
         
@@ -292,4 +305,4 @@ def chart_view(request):
             'm_name':request.session.get('m_name', '')
             }
             # m_id 세션변수 값이 없다면 '' 을 넣어라
-    return render(request, "home/index2.html", context)
+    return render(request, "home/index.html", context)
