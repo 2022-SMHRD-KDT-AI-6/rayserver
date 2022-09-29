@@ -157,21 +157,13 @@ class ImageScore(APIView):
             print(raypredict)
         else:
             file_name = '-'
-        
         scoreSave = ImgSave.objects.filter(mem_id=mem_id).order_by('-mem_seq')[0]
         scoreSave.exam_result = raypredict
         scoreSave.save()
         return Response(dict(msg="이미지저장완료", code="200",score=raypredict))
-
-
-
 class ScoreData(APIView):
     def post(self, request):
         print("로그:"+str(request.body))
         mem_id = request.data.get('mem_id', "")
         class_object = ImgSave.objects.filter(mem_id=mem_id).order_by('-mem_seq')[0]
         return Response(dict(msg="이미지저장완료", code="200",imgurl=class_object.exam_img.url, score=class_object.exam_result, date=class_object.exam_date))
-        
-
-
-

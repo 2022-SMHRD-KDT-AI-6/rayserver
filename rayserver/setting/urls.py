@@ -30,6 +30,7 @@ urlpatterns = [
     path('user/', include('user.urls')),
     path('predict/', include('predict.urls')),
     path('member/', include('member.urls')),
+    path('info/', include('info.urls')),
 
     path('board/', include('board.urls')),
     path('fileup/', include('fileup.urls')),

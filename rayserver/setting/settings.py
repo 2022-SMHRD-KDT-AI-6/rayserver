@@ -80,6 +80,7 @@ INSTALLED_APPS = [
     'board',
     'fileup',
     'chart',
+    'info',
 ]
 
 MIDDLEWARE = [
