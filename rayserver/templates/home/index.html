@@ -300,11 +300,15 @@
               </div>         
             </div>
 			{% comment %} {{mem_score}} {% endcomment %}
-            <div class="d-xl-flex justify-content-between align-items-start">
-				{% if 'm_id' in request.session %}
+      {% if 'm_id' in request.session %}
+      <div class="d-xl-flex justify-content-between align-items-start">
               		<h2 class="text-dark font-weight-bold mb-2"> 최근 검진 결과 : {{mem_score}}점</h2>
-			  	{% endif %}
+                  <!--차트가 그려질 부분-->
+                  <br>
+                  
+                  {% endif %}
               <div class="d-sm-flex justify-content-xl-between align-items-center mb-2">
+                <canvas id="myChart"></canvas>
               </div>
             </div>
             <div class="row">
@@ -314,8 +318,6 @@
                     <li class="nav-item">
                       <a class="nav-link active" id="home-tab" data-toggle="tab" href="#" role="tab" aria-selected="true">사용자 결과</a>
                     </li>
-
-                  
                   </ul>
                   <div class="d-md-block d-none">
                     <a href="#" class="text-light p-1"><i class="mdi mdi-view-dashboard"></i></a>
@@ -330,6 +332,7 @@
                           <div class="card-body text-center">
                             <h5 class="mb-2 text-dark font-weight-normal">전체 평균점수</h5>
                             <h2 class="mb-4 text-dark font-weight-bold"><h1>{{avg}}점</h1></h2>
+
                             <div class="dashboard-progress dashboard-progress-1 d-flex align-items-center justify-content-center item-parent">
                               <i class="mdi mdi-lightbulb icon-md absolute-center text-dark"></i>
                             </div>
@@ -579,7 +582,65 @@
     <script src="{% static 'js/misc.js' %}"></script>
     <!-- endinject -->
     <!-- Custom js for this page -->
-    
+    {% comment %} 차트자바스크립트시작 {% endcomment %}
+    <script type="text/javascript">
+      var context = document
+          .getElementById('myChart')
+          .getContext('2d');
+      var myChart = new Chart(context, {
+          type: 'bar', // 차트의 형태
+          data: { // 차트에 들어갈 데이터
+              labels: [
+                  //x 축
+                  '전체검사데이터','남자검사데이터','여자검사데이터','60대이상데이터','내점수'
+              ],
+              datasets: [
+                  { //데이터
+                      //label: '1','2','3','4','5',
+                      fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
+                      data: [
+                          {{avg}},{{manavg}},{{womanavg}},{{sixavg}},{{mem_score}},26,25 //x축 label에 대응되는 데이터 값
+                      ],
+                      backgroundColor: [
+                      'rgba(255, 99, 132, 0.8)',
+                      'rgba(54, 162, 235, 0.8)',
+                      'rgba(255, 206, 86, 0.8)',
+                      'rgba(75, 192, 192, 0.8)',
+                      'Purple'
+                    ],
+                 
+                  }/* ,
+                  {
+                      label: 'test2',
+                      fill: false,
+                      data: [
+                          8, 34, 12, 24
+                      ],
+                      backgroundColor: 'rgb(157, 109, 12)',
+                      borderColor: 'rgb(157, 109, 12)'
+                  } */
+              ]
+          },
+          options:{   
+              plugins:{
+                  legend: {
+                      display: false
+                  },
+              },
+              scales: {
+                  yAxes: [
+                      {
+                          ticks: {
+                              beginAtZero: true
+                          }
+                      }
+                  ]
+              }
+          }
+         
+      });
+  </script>
+
     <!-- End custom js for this page -->
     <script>
         
@@ -2710,6 +2771,5 @@
 	});
 })(jQuery);
     </script>
-    
   </body>
 </html>

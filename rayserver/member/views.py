@@ -51,7 +51,8 @@ def member_reg(request):
                 mem_id=mem_id, mem_pw=mem_pw_crypted,  mem_name=mem_name, mem_birth=mem_birth, mem_gender=mem_gender, mem_type=mem_type,
                 mem_joindate=datetime.now())
             context['message'] = mem_name + "님 회원가입 되었습니다."
-            return render(request, 'home/index.html', context)
+            # return render(request, 'home/index.html', context)
+            return redirect('/',context)
 
 @csrf_exempt
 def member_login(request):
@@ -80,8 +81,8 @@ def member_login(request):
             context['m_id'] = mem_id
             context['m_name'] = rs.mem_name
             context['message'] = rs.mem_name + "님이 로그인하셨습니다."
-            return render(request, 'home/index.html', context)
-            # return redirect('/',context)
+            # return render(request, 'home/index.html', context)
+            return redirect('/',context)
         else:
             context['message'] = "로그인 실패. 패스워드 불일치\\n\\n확인하신 후 다시 시도해 주십시오."
             return render(request, 'home/pages/samples/loginn.html', context)
