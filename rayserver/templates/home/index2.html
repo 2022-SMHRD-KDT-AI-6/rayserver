@@ -1,52 +1,19 @@
 <!DOCTYPE html>
-
-
-
 <html lang="en">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>기억할레이</title>
-    
-
-    
-
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/style.css' %}" />
 <link rel="stylesheet" href="{% static 'assets/images/reyhlg22.png' %}" />
-
 <link rel="stylesheet" href="{% static 'assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css' %}" />
 <link rel="stylesheet" href="{% static 'assets/vendors/css/vendor.bundle.base.css' %}" />
 <link rel="stylesheet" href="{% static 'assets/vendors/flag-icon-css/css/flag-icon.min.css' %}" />
 <link rel="stylesheet" href="{% static 'assets/vendors/mdi/css/materialdesignicons.min.css' %}" />
-
-
 </head>
-
-<!-- ============================================================================================================================================ -->
-<!-- ============================================================================================================================================ -->
-
   <body>
-
-	{% comment %} {% for i in results%}{{i.score}}{% endfor %}
- <h1>a</h1>
-        {% for i in results%}
-		{{i.examseq}}
-        {% endfor %}
-        <h1>a</h1>
-		{% for i in results%}
-        {{i.score}}
-        {% endfor %}
-		<h1>a<h1> {% endcomment %}
-        {% comment %} {% for i in results%}
-        {{i.womanscore}}
-        {% endfor %}
-        <h1>a</h1>
-        {% for i in results%}
-        {{i.sixscore}}
-        {% endfor %} {% endcomment %}
-
     <div class="container-scroller">
       <!-- partial:partials/_navbar.html -->
       <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -247,12 +214,6 @@
             </li>
 
 
-            <!-- <li class="nav-item">
-              <a class="nav-link" href="pages/icons/mdi.html">
-                <span class="icon-bg"><i class="mdi mdi-contacts menu-icon"></i></span>
-                <span class="menu-title">레이도형 영역별 소개</span>
-              </a>
-            </li> -->
 
 
             <li class="nav-item">
@@ -271,13 +232,6 @@
             </li>
 
 
-            <!-- <li class="nav-item">
-              <a class="nav-link" href="pages/tables/basic-table.html">
-                <span class="icon-bg"><i class="mdi mdi-table-large menu-icon"></i></span>
-                <span class="menu-title">전체
-                   비교</span>
-              </a>
-            </li> -->
 
 
             <li class="nav-item">
@@ -289,12 +243,8 @@
               
               <div class="collapse" id="auth">
                 <ul class="nav flex-column sub-menu">
-                  <!-- <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html"> Blank Page </a></li> -->
                   <li class="nav-item"> <a class="nav-link" href="pages/samples/loginn.html"> Login </a></li>
-                  <!-- <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> 404 </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> 500 </a></li>
-                </ul> -->
+              
               </div>
             </li>
             <!-- 도큐먼트 클릭부분 -->
@@ -329,9 +279,9 @@
         
        <!-- 여기서 부터 메인 판! div태그 잘 보기 -->
         <div class="main-panel">
-
-          <div class="content-wrapper"> 
-                
+			<div class="content-wrapper"> 
+				
+				
             
             <div class="row" id="proBanner">              
               <div class="col-12">
@@ -345,8 +295,11 @@
                 </span>
               </div>         
             </div>
+			{% comment %} {{mem_score}} {% endcomment %}
             <div class="d-xl-flex justify-content-between align-items-start">
-              <h2 class="text-dark font-weight-bold mb-2"> 최근 검진 결과 : {{mem_score}}점</h2>
+				{% if 'm_id' in request.session %}
+              		<h2 class="text-dark font-weight-bold mb-2"> 최근 검진 결과 : {{mem_score}}점</h2>
+			  	{% endif %}
               <div class="d-sm-flex justify-content-xl-between align-items-center mb-2">
               </div>
             </div>

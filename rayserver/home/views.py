@@ -1,6 +1,7 @@
 from http.client import HTTPResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
+from requests import session
 from predict.models import ImgSave
 import json
 from django.http import JsonResponse
@@ -73,8 +74,7 @@ class ChartView(View):
         return JsonResponse({"results":results},status=200)
 
 
-def chart_bar3(request):
- 
+def chart_view(request):
     dbCon = psycopg2.connect(dbname="raydb", user="root", password="1234")
     cursor = dbCon.cursor()
     labels = []
@@ -165,11 +165,13 @@ def chart_bar3(request):
         print(sixavg)
         
         # 유저점수
-        mem_id = request.session.get("m_id")
+        mem_score=0
+        mem_id = request.session.get("m_id","")
         print(mem_id)
-        mem_score = ImgSave.objects.filter(mem_id=mem_id).order_by('-mem_seq')[0]
-        print(mem_score)
-        print(results)
+        if mem_id != "":
+            mem_score = ImgSave.objects.filter(mem_id=mem_id).order_by('-mem_seq')[0]
+        #print(mem_score)
+        #print(results)
 
         # 전체 치매 남녀 비율 구하기
         cursor.execute("SELECT m.mem_id, m.mem_gender, e.exam_result, (to_char(now(),'YYYY')::int-substring(m.mem_birth::varchar,1,4)::int+1) as age  FROM t_member as m join t_exam as e on m.mem_id = e.mem_id")
