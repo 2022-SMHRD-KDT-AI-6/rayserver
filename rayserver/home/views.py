@@ -74,6 +74,7 @@ class ChartView(View):
 
 
 def chart_bar3(request):
+ 
     dbCon = psycopg2.connect(dbname="raydb", user="root", password="1234")
     cursor = dbCon.cursor()
     labels = []
@@ -87,21 +88,22 @@ def chart_bar3(request):
             data.append(person[2])
 
         # 전체 평균구하기
-        cursor.execute("SELECT exam_result FROM t_exam")
+        cursor.execute("SELECT exam_result, mem_seq FROM t_exam")
         # scorescount = cursor.fetchall().count()
         scores = cursor.fetchall()
         results = []
         num = 0
         cnt = 0
         for i in scores:
-            if i[0] == "":
-                pass
-            else:
+            if i[0] != "":
                 cnt += 1
                 num += float(i[0])
                 results.append({
+                "examseq":i[1],
                 "score":i[0]
-            })
+                })
+            else:
+                print('a')
         avg = int(num/cnt)
         print(avg)
         
@@ -141,6 +143,9 @@ def chart_bar3(request):
         print('여자평균')
         print(womanavg)
 
+
+
+
         # 60대 이상중에서 전체 평균구하기
         cursor.execute("SELECT m.mem_id, m.mem_joindate, e.exam_result, (to_char(now(),'YYYY')::int-substring(m.mem_birth::varchar,1,4)::int+1) as age  FROM t_member as m join t_exam as e on m.mem_id = e.mem_id where (to_char(now(),'YYYY')::int-substring(m.mem_birth::varchar,1,4)::int+1)>=60")
         sixscore = cursor.fetchall()
@@ -166,13 +171,70 @@ def chart_bar3(request):
         print(mem_score)
         print(results)
 
+        # 전체 치매 남녀 비율 구하기
+        cursor.execute("SELECT m.mem_id, m.mem_gender, e.exam_result, (to_char(now(),'YYYY')::int-substring(m.mem_birth::varchar,1,4)::int+1) as age  FROM t_member as m join t_exam as e on m.mem_id = e.mem_id")
+        allmw = cursor.fetchall()
+        cntmall = 0
+        cntwall = 0
+        for i in allmw:
+            if i[2] == "":
+                pass
+            elif float(i[2])<20:
+                if i[1] == 'w':
+                    cntwall +=1
+                elif i[1] == 'm':
+                    cntmall +=1
+        results.append({
+            "cntmall":cntmall,
+            "cntwall":cntwall
+        })
+        # 20대 치매 남녀 비율 구하기
+        cursor.execute("SELECT m.mem_id, m.mem_gender, e.exam_result, (to_char(now(),'YYYY')::int-substring(m.mem_birth::varchar,1,4)::int+1) as age  FROM t_member as m join t_exam as e on m.mem_id = e.mem_id where (to_char(now(),'YYYY')::int-substring(m.mem_birth::varchar,1,4)::int+1)>=20 and (to_char(now(),'YYYY')::int-substring(m.mem_birth::varchar,1,4)::int+1)<30;")
+        twomw = cursor.fetchall()
+        cntmtwo = 0
+        cntwtwo = 0
+        for i in twomw:
+            if i[2] == "":
+                pass
+            elif float(i[2])<20:
+                if i[1] == 'w':
+                    cntwtwo +=1
+                elif i[1] == 'm':
+                    cntmtwo +=1
+        # 30대 치매 남녀 비율 구하기
+        cursor.execute("SELECT m.mem_id, m.mem_gender, e.exam_result, (to_char(now(),'YYYY')::int-substring(m.mem_birth::varchar,1,4)::int+1) as age  FROM t_member as m join t_exam as e on m.mem_id = e.mem_id where (to_char(now(),'YYYY')::int-substring(m.mem_birth::varchar,1,4)::int+1)>=30 and (to_char(now(),'YYYY')::int-substring(m.mem_birth::varchar,1,4)::int+1)<40;")
+        threemw = cursor.fetchall()
+        cntmthree = 0
+        cntwthree = 0
+        for i in threemw:
+            if i[2] == "":
+                pass
+            elif float(i[2])<20:
+                if i[1] == 'w':
+                    cntwthree +=1
+                elif i[1] == 'm':
+                    cntmthree +=1
+        # 40대 치매 남녀 비율 구하기
+        cursor.execute("SELECT m.mem_id, m.mem_gender, e.exam_result, (to_char(now(),'YYYY')::int-substring(m.mem_birth::varchar,1,4)::int+1) as age  FROM t_member as m join t_exam as e on m.mem_id = e.mem_id where (to_char(now(),'YYYY')::int-substring(m.mem_birth::varchar,1,4)::int+1)>=40 and (to_char(now(),'YYYY')::int-substring(m.mem_birth::varchar,1,4)::int+1)<50;")
+        twomw = cursor.fetchall()
+        cntmfour = 0
+        cntwfour = 0
+        for i in twomw:
+            if i[2] == "":
+                pass
+            elif float(i[2])<20:
+                if i[1] == 'w':
+                    cntwfour +=1
+                elif i[1] == 'm':
+                    cntmfour +=1
+
         # 60대이상 치매의심 남자여자 비율 구하기
         cursor.execute("SELECT m.mem_id, m.mem_gender, e.exam_result, (to_char(now(),'YYYY')::int-substring(m.mem_birth::varchar,1,4)::int+1) as age  FROM t_member as m join t_exam as e on m.mem_id = e.mem_id where (to_char(now(),'YYYY')::int-substring(m.mem_birth::varchar,1,4)::int+1)>=60")
         sixmw = cursor.fetchall()
         num5=0
         cnt5=0
-        cntm=0
-        cntw=0
+        cntm60=0
+        cntw60=0
         for i in sixmw:
             if i[2] == "":
                 pass
@@ -180,20 +242,26 @@ def chart_bar3(request):
                 cnt5 +=1
                 num5 += float(i[2])
                 if i[1] == 'w':
-                    cntw +=1
+                    cntw60 +=1
                     
                 elif i[1] == 'm':
-                    cntm += 1
+                    cntm60 += 1
                     results.append({
                     })
         results.append({
-            "cntm":cntm,
-            "cntw":cntw
+            "cntm60":cntm60,
+            "cntw":cntw60
                 })
-        print('남자',cntm)
-        print('여자',cntw)
+        print('남자',cntm60)
+        print('여자',cntw60)
         gender_list = ['Male', 'Female']
-        gender_number = [cntm, cntw]
+        gender_number = [cntm60, cntw60]
+        # 치매환자 비율 한번에 보기
+        gender_allm = [cntmall,cntm60,cntmtwo,cntmthree,cntmfour]
+        gender_allw = [cntwall,cntw60,cntwtwo,cntwthree,cntwfour]
+
+           
+    
         context = {
             'labels' : labels,
             'data' : data,
@@ -212,9 +280,14 @@ def chart_bar3(request):
             # 현재유저데이터
             'mem_score':mem_score,
             # 60대이상이고 남녀 비율체크데이터
-            'cntm':cntm,
-            'cntw':cntw,
+            'cntm60':cntm60,
+            'cntw60':cntw60,
             'gender_list':gender_list,
-            'gender_number':gender_number
+            'gender_number':gender_number,
+            'gender_allm':gender_allm,
+            'gender_allw':gender_allw,
+            'm_id':request.session.get('m_id', ''),
+            'm_name':request.session.get('m_name', '')
             }
+            # m_id 세션변수 값이 없다면 '' 을 넣어라
     return render(request, "home/index2.html", context)

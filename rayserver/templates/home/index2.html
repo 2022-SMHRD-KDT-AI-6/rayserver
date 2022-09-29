@@ -28,7 +28,25 @@
 <!-- ============================================================================================================================================ -->
 
   <body>
-    
+
+	{% comment %} {% for i in results%}{{i.score}}{% endfor %}
+ <h1>a</h1>
+        {% for i in results%}
+		{{i.examseq}}
+        {% endfor %}
+        <h1>a</h1>
+		{% for i in results%}
+        {{i.score}}
+        {% endfor %}
+		<h1>a<h1> {% endcomment %}
+        {% comment %} {% for i in results%}
+        {{i.womanscore}}
+        {% endfor %}
+        <h1>a</h1>
+        {% for i in results%}
+        {{i.sixscore}}
+        {% endfor %} {% endcomment %}
+
     <div class="container-scroller">
       <!-- partial:partials/_navbar.html -->
       <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -328,7 +346,7 @@
               </div>         
             </div>
             <div class="d-xl-flex justify-content-between align-items-start">
-              <h2 class="text-dark font-weight-bold mb-2"> 검진 결과 </h2>
+              <h2 class="text-dark font-weight-bold mb-2"> 최근 검진 결과 : {{mem_score}}점</h2>
               <div class="d-sm-flex justify-content-xl-between align-items-center mb-2">
               </div>
             </div>
@@ -411,39 +429,23 @@
                         <div class="card">
                           <div class="card-body">
                             <div class="row">
-                              <div class="col-sm-12">
-                                <div class="d-flex justify-content-between align-items-center mb-4">
-                                  <h4 class="card-title mb-0">Recent Activity</h4>
-                                  <div class="dropdown dropdown-arrow-none">
-                                    <button class="btn p-0 text-dark dropdown-toggle" type="button" id="dropdownMenuIconButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                      <i class="mdi mdi-dots-vertical"></i>
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuIconButton1">
-                                      <h6 class="dropdown-header">Settings</h6>
-                                      <a class="dropdown-item" href="#">Action</a>
-                                      <a class="dropdown-item" href="#">Another action</a>
-                                      <a class="dropdown-item" href="#">Something else here</a>
-                                      <div class="dropdown-divider"></div>
-                                      <a class="dropdown-item" href="#">Separated link</a>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
+                            
                               <div class="col-lg-3 col-sm-4 grid-margin  grid-margin-lg-0">
                                 <div class="wrapper pb-5 border-bottom">
+									<h3 class="mb-0 text-dark font-weight-bold">60대이상 치매 남녀비율</h3>
+									<br>
                                   <div class="text-wrapper d-flex align-items-center justify-content-between mb-2">
-                                    <p class="mb-0 text-dark">Total Profit</p>
-                                    <span class="text-success"><i class="mdi mdi-arrow-up"></i>2.95%</span>
+                                    <p class="mb-0 text-dark">남자비율수치</p>
+                                    <span class="text-success" id="manNumber">0%</span>
+									<p class="mb-0 text-dark">여자비율수치</p>
+                                    <span class="text-success" id="womanNumber">0%</span>
                                   </div>
-                                  <h3 class="mb-0 text-dark font-weight-bold">$ 92556</h3>
+								  
+								  
                                   <canvas id="total-profit"></canvas>
                                 </div>
                                 <div class="wrapper pt-5">
-                                  <div class="text-wrapper d-flex align-items-center justify-content-between mb-2">
-                                    <p class="mb-0 text-dark">Expenses</p>
-                                    <span class="text-success"><i class="mdi mdi-arrow-up"></i>52.95%</span>
-                                  </div>
-                                  <h3 class="mb-4 text-dark font-weight-bold">$ 59565</h3>
+									<h3 class="mb-4 text-dark font-weight-bold">전체검사 데이터 추이</h3>
                                   <canvas id="total-expences"></canvas>
                                 </div>
                               </div>
@@ -451,13 +453,9 @@
                                 <div class="pl-0 pl-lg-4 ">
                                   <div class="d-xl-flex justify-content-between align-items-center mb-2">
                                     <div class="d-lg-flex align-items-center mb-lg-2 mb-xl-0">
-                                      <h3 class="text-dark font-weight-bold mr-2 mb-0">Devices sales</h3>
-                                      <h5 class="mb-0">( growth 62% )</h5>
+                                      <h3 class="text-dark font-weight-bold mr-2 mb-0">치매환자 비율 한번에보기</h3>
                                     </div>
-                                    <div class="d-lg-flex">
-                                      <p class="mr-2 mb-0">Timezone:</p>
-                                      <p class="text-dark font-weight-bold mb-0">GMT-0400 Eastern Delight Time</p>
-                                    </div>
+                                    
                                   </div>
                                   <div class="graph-custom-legend clearfix" id="device-sales-legend"></div>
                                   <canvas id="device-sales"></canvas>
@@ -473,6 +471,9 @@
                         document.getElementById('p2').innerHTML = parseInt(({{manavg}}/36)*100)+'%';
                         document.getElementById('p3').innerHTML = parseInt(({{womanavg}}/36)*100)+'%';
                         document.getElementById('p4').innerHTML = parseInt(({{sixavg}}/36)*100)+'%';
+						document.getElementById('manNumber').innerHTML = ({{gender_number}}[0]/2)*100+'%';
+						document.getElementById('womanNumber').innerHTML = ({{gender_number}}[1]/2)*100+'%';
+						
                     </script>
                     
                     
@@ -738,15 +739,15 @@
     
 		if ($("#total-profit").length) {
 			var totalProfitData = {
-				labels: ['1','2','3','4'],
+				labels: [{% for gender in gender_list %} '{{ gender }}', {% endfor %}],
 				datasets: [{
 					label: 'Margin',
-					data: [2, 4, 6, 4.5, 5.5, 4, 5, 4.2, 5.5],
+					data: [{% for number in gender_number %} '{{ number }}', {% endfor %}],
 					backgroundColor: [
-						'#cfe1ff',
+						'#cfe1ff','pink'
 					],
 					borderColor: [
-						'#0062ff'
+						'#0062ff','#dc143c'
 					],
 					borderWidth: 3,
 					fill: true,
@@ -781,7 +782,7 @@
 					}],
 				},
 				legend: {
-					display: false,
+					display: true,
 				},
 				elements: {
 					point: {
@@ -798,7 +799,7 @@
 			var barChartCanvas = $("#total-profit").get(0).getContext("2d");
 			// This will get the first returned node in the jQuery collection.
 			var barChart = new Chart(barChartCanvas, {
-				type: 'line',
+				type: 'pie',
 				data: totalProfitData,
 				options: totalProfitOptions,
 			});
@@ -876,30 +877,30 @@
 			});
 		}
 
-		if ($("#total-expences").length) {
+		if ($("#total-expences")) {
 			var totalExpencesData = {
-				labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"],
+				labels: [{% for data in results %} '{{ data.examseq }}', {% endfor %}],
 				datasets: [{
 					label: 'Margin',
-					data: [4, 5, 6, 5, 4, 5, 4, 6, 5],
+					data: [{% for data in results %} '{{ data.score }}', {% endfor %}],
 					backgroundColor: [
 						'#e1fff3',
 					],
 					borderColor: [
 						'#3dd597'
 					],
-					borderWidth: 3,
+					borderWidth: 1,
 					fill: true,
 				}],
 			};
 			var totalExpencesOptions = {
 				scales: {
 					yAxes: [{
-						display: false,
+						//display: false,
 						gridLines: {
-							drawBorder: false,
-							display: false,
-							drawTicks: false
+							//drawBorder: false,
+							//display: false,
+							//drawTicks: false
 						},
 						ticks: {
 							beginAtZero: true,
@@ -910,13 +911,13 @@
 						display: false,
 						position: 'bottom',
 						gridLines: {
-							drawBorder: false,
-							display: false,
+						drawBorder: false,
+						display: false,
 							drawTicks: false
 						},
 						ticks: {
 							beginAtZero: true,
-							stepSize: 10
+							stepSize: 1
 						}
 					}],
 				},
@@ -1016,10 +1017,10 @@
 
 		if ($("#device-sales").length) {
 			var deviceSalesData = {
-				labels: ["Iphone", "Google", "Sumsung", "Huawei", "Xiaomi", "Oppo", "Vivo", "Lg"],
+				labels: ['전체 치매 남녀비율','60대이상 치매 남녀비율','20대 치매 남녀비율','30대 치매 남녀비율','40대 치매 남녀비율'],
 				datasets: [{
-						label: 'Demand',
-						data: [450, 500, 300, 350, 200, 320, 310, 700],
+						label: '남성',
+						data: [{% for number in gender_allm %} '{{ number }}', {% endfor %}],
 						backgroundColor: [
 							'#a461d8', '#a461d8', '#a461d8', '#a461d8', '#a461d8', '#a461d8', '#a461d8', '#a461d8',
 						],
@@ -1030,8 +1031,8 @@
 						fill: false
 					},
 					{
-						label: 'Supply',
-						data: [250, 100, 310, 75, 290, 100, 500, 260],
+						label: '여성',
+						data: [{% for number in gender_allw %} '{{ number }}', {% endfor %}],
 						backgroundColor: [
 							'#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a', '#fc5a5a',
 						],
@@ -1774,7 +1775,9 @@
 			});
 			document.getElementById('pageViewAnalyticLengend').innerHTML = barChart.generateLegend();
     }
-    
+
+
+
 		if ($("#page-view-analytic-dark").length) {
 			var graphGradient = document.getElementById("page-view-analytic-dark").getContext('2d');;
 			var saleGradientBg = graphGradient.createLinearGradient(25, 0, 25, 420);
