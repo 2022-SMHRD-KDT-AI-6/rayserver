@@ -1,20 +1,58 @@
 {% extends "include/base.html" %}
 {% load static %}
+
+
 {% block main_area %}
+<link rel="stylesheet" href="{% static 'css/imgall.css' %}"/>
+
+
+<!-- 여기 바로 위에 한줄 넣었음 -->
 
 <div class="row">
     {% for product in products %}
     <div class="col-lg-4">
         <div class= "box">
+            <!-- <center>
             {% if 'm_id' in request.session %}
             검사아이디 = {{request.session.m_id}}
             {% endif %}
+
         <h3>검사번호 : {{product.mem_seq}}</h3>
-        <img src="{{product.exam_img.url}}" width="500" height="500">
-        <h6 style="display: inline-block; float: right"><strong>검사아이디 : {{product.mem_id}}</strong></h6>
+        <img  src="{{product.exam_img.url}}" class="bimg1"> -->
+        <!-- <img class="bimg1" src="{{product.exam_img.url}}" width="500" height="500">  요기 수정-->
+
+        <!-- <h6 style="display: inline-block; float: right"><strong>검사아이디 : {{product.mem_id}}</strong></h6>
+
         <h6>검사날짜 : {{product.exam_date}}</h6>
-        <a href="product/{{product.pk}}" class="btn btn-success">보기</a>
+
+        <a href="product/{{product.pk}}" class="btn btn-success22">1111111111111111111111보기</a>
+
         <h6 style="display: inline-block; float: right"><strong>검사결과 : {{product.exam_result}}</strong></h6>
+            </center> -->
+
+            <center class="aaaaa">
+                {% if 'm_id' in request.session %}
+                <!-- 검사아이디 = {{request.session.m_id}} -->
+                {% endif %}
+                
+            <br><br>
+            <h3>검사번호 : {{product.mem_seq}}</h3>
+            <br>
+            <img  src="{{product.exam_img.url}}" class="bimg1">
+            <!-- <img class="bimg1" src="{{product.exam_img.url}}" width="500" height="500">  요기 수정-->
+    
+
+            <br><br>
+            <h6 >검사아이디 : {{product.mem_id}}</h6>   
+            <h6>검사결과 : {{product.exam_result}}</h6>
+            <h6>검사날짜 : {{product.exam_date}}</h6>
+
+            <br>
+            <a href="product/{{product.pk}}" class="btn-success22">자세히 보기</a>
+
+            <br><br><br>
+                </center>
+                
         </div>
         <br>
     </div>

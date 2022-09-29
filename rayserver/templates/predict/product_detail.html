@@ -1,99 +1,54 @@
 {% extends "include/base.html" %}
 {% load static %}
 {% block main_area %}
-<script>
-  {% comment %} console.log({{ product }}) {% endcomment %}
-</script>
-<h3>검사번호 : {{ imgsave.mem_seq }}</h3>
 
+
+<link rel="stylesheet" href="{% static 'css/imgall.css' %}" />
+
+<!-- 여기 바로 위에 한줄 넣었음 -->
+
+<center>
 <div class="card">
-	<div class="row">
-		<aside class="col-sm-5 border-right">
-      <article class="gallery-wrap"> 
-      <div class="img-big-wrap">
-        <div>
-          
-          <a href="#">
-            {% comment %} <img src="{{ product.imageURL }}" class="img-fluid"> {% endcomment %}
-            <img src="{{imgsave.exam_img.url}}" width="500" height="500">
-          </a>
-        </div>
-      </div>
- 
-      이미지이름 : {{imgsave.exam_img.name}}
-      <h3>검사결과 : <strong>{{imgsave.exam_result}}</strong></h3>
-      </article>
-          </aside>
-          <aside class="col-sm-7">
+
+  <div class="box">
+    <br><br><br>
+    <h3>검사번호 : {{ imgsave.mem_seq }}</h3>
+    <br><br>
+    {% comment %} <img  src="{{ product.imageURL }}"> {% endcomment %}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+    <img src="{{imgsave.exam_img.url}}" class="img-fluid2">
+  
+          <!-- <aside class="col-sm-7"> -->
       <article class="card-body p-5">
         <h3 class="title mb-3">{{ product.name }}</h3>
         
-      <p class="price-detail-wrap"> 
-        <span class="price h3 text-warning"> 
-          <span class="currency">$</span><span class="num">{{ product.price }}</span>
-        </span> 
+      </div>
       
-      </p> <!-- price-detail-wrap .// -->
+      
+       <!-- price-detail-wrap .// -->
       <dl class="item-property">
-        <dt>제품설명</dt>
+        <h3><dt class="bora">검사소개</dt></h3>
+        <br><br>
+
         검사아이디 : {{imgsave.mem_id}}
+        <hr>
+
+        이미지이름 : {{imgsave.exam_img.name}}
+        <hr>
+      검사결과 : <strong>{{imgsave.exam_result}}</strong>
+      <hr>
+        
+        
         검사날짜 : {{imgsave.exam_date}}
         <dd><p>{{ product.description }} </p></dd>
-      </dl>
-      
-   
         
-        <hr>
-    <hr>
-{% if not 'm_id' in request.session %}
-    <a href="/member/register">[회원가입]</a><br>
-    <a href="/member/login">[로그인]</a>
-{% else %}
-<a href="" class="small">수정</a>,
-<a href="" class="small">삭제</a>
-{% endif %}
-
-  {% for comment in product.comments.all %}
-    <!-- #product.comments.all 에서 루핑// -->
-    {% if user.is_authenticated or comment.approved_comment %}
-    <!-- 인증이 안되면 승인된 댓글은 보이나 스팸 댓글 지우는 행위에 참가 할 수 없게하기 위해 -->
+      </dl>
     
-    <div class="comment">
-        <div class="editcomment">
-            {{ comment.created_date }}
-              {% if comment.modify_date %}
-              (수정:{{ comment.modify_date }})
-              {% endif %}
-              
-            {% if not comment.approved_comment %}
-                <a class="btn btn-default" href="{% url 'comment_remove' pk=comment.pk %}">💩</a>
-            {% endif %}
-            
-            
+  <!-- </div>  -->
+  <!-- 위에 row, 아래 card -->
+</div>
+</center>
 
-            {% if request.user == comment.author %}
-            <a href="{% url 'comment_modify' pk=comment.pk  %}" class="small">수정</a>,
-            <a href="{% url 'comment_remove' pk=comment.pk  %}" class="small">삭제</a>
-            {% endif %}
-        </div>
-        <strong>(🐺 :{{ comment.author }})</strong>
-        <p>✒️ :{{ comment.text|linebreaks }}</p>
-    </div>
-    {% endif %}
-  {% empty %} 
-    <p>앙직 댓글이 없어요~~</p>
-{% endfor %}
-{% if user.is_authenticated %}
-      {% comment %} <a class="btn btn-success" href="{% url 'add_comment' pk=product.pk %}">댓글추가</a>   {% endcomment %}
-{% else %} 
-<a href="{% url 'login' %}" class="btn btn-danger">로그인 후 댓글 달기</a>
-{% endif %}
-          </article> <!-- card-body.// -->
-          </aside> <!-- col.// -->
-        </div> <!-- row.// -->
-      </div> <!-- card.// -->
-      </div>
-      <!--container.//-->
-      </article>
-        </div>
+   <script>
+    
+   </script>
 {% endblock main_area %}

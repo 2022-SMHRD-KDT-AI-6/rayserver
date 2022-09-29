@@ -1,0 +1,63 @@
+html{
+    /* background-color: aqua; */
+}
+
+
+/* 여기는 그 predict페이지 css 부분 시작 */
+.bimg1 {
+    width: 400px;
+    height: 400px;
+    border-radius: 20%;
+    border: 2px solid;
+    border-color: #6C4797;
+}
+
+.img-fluid{
+    width: 400px;
+    height: 400px;
+    border-radius: 20%;
+    border: 5px solid;
+    border-color: #6C4797;
+}
+
+.img-fluid2{
+    width: 500px;
+    height: 500px;
+
+    border-radius: 1%;
+}
+
+.btn-success22 {
+    color: #fff;
+    background-color: #F29200;
+    border-color: #F29200; 
+    align-content: center;
+    padding: 0.6rem 0.6rem;
+    font-size: 0.9rem;
+    border-radius: 5%;
+}
+
+.aaaaa {
+    background-color: #fff;
+    border-radius: 5%;
+    border: 2px solid;
+    border-color: #6C4797;
+}
+.card {
+    width: 1500px;
+    height: 1035px;
+}
+
+.bora {
+    background-color: #6C4797;
+    width: 150px;
+    height: 50px;
+    text-align: center;
+
+    color: #fff;
+    border-color: #F29200; 
+    align-content: center;
+    padding: 0.6rem 0.6rem;
+    font-size: 1.5rem;
+    border-radius: 55%;
+}

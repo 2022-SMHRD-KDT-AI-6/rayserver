@@ -8745,7 +8745,8 @@ button.bg-dark:focus {
   padding-left: 1rem !important; }
 
 .p-4 {
-  padding: 1.5rem !important; }
+  padding: 1.5rem !important; 
+}
 
 .pt-4,
 .py-4 {
@@ -10341,7 +10342,7 @@ textarea:focus,
 textarea:hover,
 textarea:visited {
   -webkit-box-shadow: none;
-  box-shadow: none; }
+  box-shadow: none;}
 
 .btn.active.focus,
 .btn.active:focus,
@@ -10739,7 +10740,7 @@ code {
   width: 26px;
   height: 26px; }
 
-.stretch-card {
+/* .stretch-card {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -10748,7 +10749,8 @@ code {
   align-items: stretch;
   -webkit-box-pack: stretch;
   -ms-flex-pack: stretch;
-  justify-content: stretch; }
+  justify-content: stretch; } */
+  
   .stretch-card > .card {
     width: 100%;
     min-width: 100%; }
