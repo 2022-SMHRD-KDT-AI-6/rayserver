@@ -161,6 +161,7 @@ class ImageScore(APIView):
         scoreSave.exam_result = raypredict
         scoreSave.save()
         return Response(dict(msg="이미지저장완료", code="200",score=raypredict))
+        
 class ScoreData(APIView):
     def post(self, request):
         print("로그:"+str(request.body))
