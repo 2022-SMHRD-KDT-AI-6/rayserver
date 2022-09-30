@@ -8,6 +8,7 @@ from rest_framework.views import APIView
 from predict.models import ImgSave
 from .serializer import ColumnSerializer, FoodSerializer, TrainingSerializer
 from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import CreateView
 
 @csrf_exempt
 def foodinfo(request):
@@ -27,7 +28,14 @@ def columnInfo(request):
         query_set = ColumnTable.objects.all()
         serializer = ColumnSerializer(query_set, many=True)
         return JsonResponse(serializer.data, safe=False)
+import os
+from datetime import datetime
+from django.urls import reverse_lazy
 
-def allInsert(request):
-    if request.method == "POST":
-        pass
+BASE_DIR = "C:/Users/smhrd/Desktop/"
+img_files = os.path.join(BASE_DIR,'img/')
+
+
+def practice(request):
+    print(img_files)
+    return HttpResponse('Hello world!')
