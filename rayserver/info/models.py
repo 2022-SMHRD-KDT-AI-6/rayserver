@@ -13,3 +13,7 @@ class FoodTable(models.Model):
         return str(self.food_img)  # 수정
     def summary(self):
         return self.body[:100]
+
+
+
+
