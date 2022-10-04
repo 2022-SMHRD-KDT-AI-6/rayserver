@@ -14,7 +14,7 @@ urlpatterns = [
     path('column', columnInfo, name='column'),
     path('allinsert',practice,name='allinsert'),
 
-    path('trainone', trainInfoOne.as_view(), name='trainone'),
 
+    path('trainone', trainInfoOne.as_view(), name='trainone'),
 ]
 
