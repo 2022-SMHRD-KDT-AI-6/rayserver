@@ -4,9 +4,11 @@ from django.views.decorators.csrf import csrf_exempt
 from requests import session
 from predict.models import ImgSave
 import json
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.views import View
 import psycopg2
+
+from .models import PlaceInfo
 
 # Create your views here.
 
@@ -306,3 +308,15 @@ def chart_view(request):
             }
             # m_id 세션변수 값이 없다면 '' 을 넣어라
     return render(request, "home/index.html", context)
+
+import csv
+def csvToModel(request):
+    path = "C:/Users/smhrd/Desktop/csvplace2.csv"
+    file = open(path)
+    reader = csv.reader(file)
+    print('----', reader)
+    list = []
+    for row in reader:
+        list.append(PlaceInfo(category=row[0],name=row[1],address=row[2],tel=row[3]))
+    PlaceInfo.objects.bulk_create(list)
+    return HttpResponse('create model ~~')
