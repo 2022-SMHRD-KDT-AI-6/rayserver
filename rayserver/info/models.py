@@ -25,6 +25,8 @@ class TrainingTable3(models.Model):
         db_table = 't_train3'
         verbose_name = '운동정보 테이블'
 
+
+
 class ColumnTable(models.Model):
     column_seq = models.AutoField(verbose_name="컬럼 순번", primary_key=True)
     column_title = models.CharField(verbose_name="컬럼 제목", max_length=400, null=False)
@@ -33,7 +35,7 @@ class ColumnTable(models.Model):
     column_link = models.CharField(verbose_name="컬럼 출처", max_length=400)
     column_date = models.DateField(verbose_name="컬럼 날짜", auto_now_add=True)
     class Meta:
-        db_table = 't_column2'
+        db_table = 't_column4'
         verbose_name='컬럼정보 테이블'
 
 
