@@ -320,3 +320,19 @@ def csvToModel(request):
         list.append(PlaceInfo(category=row[0],name=row[1],address=row[2],tel=row[3]))
     PlaceInfo.objects.bulk_create(list)
     return HttpResponse('create model ~~')
+
+def place_view(request):
+    context = {}
+    # m_id 세션변수 값이 없다면 '' 을 넣어라
+    context['m_id'] = request.session.get('m_id', '')
+    context['m_name'] = request.session.get('m_name', '')
+
+
+    return render(request, 'home/search.html', context)
+
+from django.views import generic
+
+class board(generic.TemplateView):
+    template_name: 'home/search.html'
+    list = PlaceInfo.objects.all()
+    pass

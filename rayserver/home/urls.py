@@ -1,7 +1,7 @@
 from unicodedata import name
 from django.urls import path
 from .views import imgresult_view, index, home_view, introcom_view, introrey_view, introteam_view,ChartView, chart_view
-from .views import csvToModel
+from .views import csvToModel, place_view
 from .models import PlaceInfo
 app_name = "home"
 
@@ -17,4 +17,5 @@ urlpatterns = [
     path('', chart_view, name=''),
 
     path('csv',csvToModel,name='csv'),
+    path('place',place_view,name='place')
 ]
