@@ -2,7 +2,7 @@ import code
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from requests import Response
-from .models import FoodTable, TrainingTable, ColumnTable
+from .models import FoodTable3, TrainingTable3, ColumnTable
 from django.core import serializers
 from rest_framework.views import APIView
 from predict.models import ImgSave
@@ -13,13 +13,13 @@ from django.views.generic import CreateView
 @csrf_exempt
 def foodinfo(request):
     if request.method == 'POST':
-        query_set = FoodTable.objects.all()
+        query_set = FoodTable3.objects.all()
         serializer = FoodSerializer(query_set, many=True)
         return JsonResponse(serializer.data, safe=False)
 
 def trainInfo(request):
     if request.method == 'POST':
-        query_set = TrainingTable.objects.all()
+        query_set = TrainingTable3.objects.all()
         serializer = TrainingSerializer(query_set, many=True)
         return JsonResponse(serializer.data, safe=False)
 
