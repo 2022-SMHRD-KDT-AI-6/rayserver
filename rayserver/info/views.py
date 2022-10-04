@@ -12,19 +12,19 @@ from django.views.generic import CreateView
 
 @csrf_exempt
 def foodinfo(request):
-    if request.method == 'GET':
+    if request.method == 'POST':
         query_set = FoodTable.objects.all()
         serializer = FoodSerializer(query_set, many=True)
         return JsonResponse(serializer.data, safe=False)
 
 def trainInfo(request):
-    if request.method == 'GET':
+    if request.method == 'POST':
         query_set = TrainingTable.objects.all()
         serializer = TrainingSerializer(query_set, many=True)
         return JsonResponse(serializer.data, safe=False)
 
 def columnInfo(request):
-    if request.method == 'GET':
+    if request.method == 'POST':
         query_set = ColumnTable.objects.all()
         serializer = ColumnSerializer(query_set, many=True)
         return JsonResponse(serializer.data, safe=False)
