@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>기억할레이</title>
-    <script src="https://kit.fontawesome.com/9465c8bbb0.js" crossorigin="anonymous"></script>
+    {% comment %} <script src="https://kit.fontawesome.com/9465c8bbb0.js" crossorigin="anonymous"></script> {% endcomment %}
     <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
     <link href="{% static 'css/jquery-ui.min.css' %}" rel="stylesheet" />
     <script type="text/javascript" src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
@@ -20,9 +20,18 @@
     <link rel="stylesheet" href="{% static 'assets/vendors/mdi/css/materialdesignicons.min.css' %}" />
 
     <link rel="stylesheet" href="{% static 'css/imgall.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/pj.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/index2.css' %}" />
+
+
+  
+
     <!-- 여기여기 -->
 
 </head>
+
+ {% comment %}========================================================================================================  {% endcomment %}
+
 <body>
     <div class="container-scroller">
         <!-- partial:partials/_navbar.html -->
@@ -116,15 +125,13 @@
                       <i class="mdi mdi-settings"></i>
                     </a>
                     <div role="separator" class="dropdown-divider"></div>
-  
-                    <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="/member/logout">
-                      <span>로그아웃</span>
-                      <i class="mdi mdi-logout ml-1"></i>
-                    </a>
+
                     {% endif %}
                   </div>
                 </div>
               </li>
+
+
               <!-- 여기는 알림아이콘 부분 시작 -->
               {% if 'm_id' in request.session %}
               
@@ -205,9 +212,9 @@
                 </a>
                 <div class="collapse" id="ui-basic">
                   <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">레이프로젝트</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">(주)뉴로젠</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">기억할레이</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="introrey">레이프로젝트</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="introcom">(주)뉴로젠</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="introteam">기억할레이</a></li>
                   </ul>
                 </div>
               </li>
@@ -215,14 +222,14 @@
           
 
               <li class="nav-item">
-                <a class="nav-link" href="pages/forms/basic_elements.html">
+                <a class="nav-link" href="/search">
                   <span class="icon-bg"><i class="mdi mdi-format-list-bulleted menu-icon"></i></span>
                   <span class="menu-title">내 주변 치매센터 정보</span>
                 </a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="pages/charts/chartjs.html">
+                <a class="nav-link" href="/predict">
                   <span class="icon-bg"><i class="mdi mdi-chart-bar menu-icon"></i></span>
                   <span class="menu-title">검사 분석 결과</span>
                 </a>
@@ -238,7 +245,7 @@
                 <div class="collapse" id="auth">
                   <ul class="nav flex-column sub-menu">
                     <!-- <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html"> Blank Page </a></li> -->
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/loginn.html"> Login </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="pages/samples/loginn.html"> 고민중.. </a></li>
                     <!-- <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
                     <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> 404 </a></li>
                     <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> 500 </a></li>
@@ -283,14 +290,13 @@
   
               {% block main_area %}
               
-                
-
               {% endblock %}
              
             <!-- partial:partials/_footer.html -->
             <footer class="footer">
+              <hr>
               <div class="footer-inner-wraper">
-                <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                <div class="d-sm-flex justify-content-center justify-content-sm-between">                  
                   <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">기억할레이</span>
                   <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> 팀장 : 최대열 / 팀원 : 김은영, 김준호, 이수빈</span>
                   <!-- <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboard templates</a> from Bootstrapdash.com</span> -->

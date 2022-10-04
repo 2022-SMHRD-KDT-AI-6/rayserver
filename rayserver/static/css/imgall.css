@@ -44,8 +44,8 @@ html{
     border-color: #6C4797;
 }
 .card {
-    width: 1500px;
-    height: 1035px;
+    width: 1500px !important;
+    height: 1120px !important;
 }
 
 .bora {

@@ -33,7 +33,7 @@ p {
     font-style: normal;
 } */
 
-img {
+#imgsb {
     height: auto;
     max-width: 100%;
     vertical-align: middle;
@@ -71,7 +71,7 @@ h1 {
 margin-left: 10px;
 }
 
-#imgsb{
+/* #imgsb2 {
     width: 500px;
     height: 380px;
-}
+} */
