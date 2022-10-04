@@ -42,9 +42,13 @@ def practice(request):
     print(img_files)
     return HttpResponse('Hello world!')
 
+
 class trainInfoOne(APIView):
     def post(self, request):
-        print("로그:"+str(request.body))
-        return Response(dict(msg="aa",code="as"))
-        # class_object = TrainingTable3.objects.all().order_by('-train_seq')[0]
-        # return Response(dict(msg="운동데이터하나", code="200", imgurl=class_object.train_img.url, title=class_object.train_title, info=class_object.train_info))
+        print("로그 : " +str(request.body))
+        class_object = TrainingTable3.objects.filter(train_seq='1').first()
+        data = dict(
+            msg="운동데이터하나", 
+            code="200"
+            )
+        return Response(data)

@@ -24,6 +24,10 @@ class TrainingTable3(models.Model):
     class Meta:
         db_table = 't_train3'
         verbose_name = '운동정보 테이블'
+    def __str__(self):
+        return str(self.train_seq)  # 수정
+    def summary(self):
+        return self.body[:100]
 
 
 
@@ -37,6 +41,10 @@ class ColumnTable(models.Model):
     class Meta:
         db_table = 't_column4'
         verbose_name='컬럼정보 테이블'
+    def __str__(self):
+        return str(self.column_seq)  # 수정
+    def summary(self):
+        return self.body[:100]
 
 
 

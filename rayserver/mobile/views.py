@@ -1,3 +1,4 @@
+from django.db.models import Max, Min, Avg
 from django.shortcuts import render
 from rest_framework.views import APIView
 from member.models import Members
@@ -12,6 +13,7 @@ import cv2
 import numpy as np
 import shutil
 from numpy import argmax
+from .models import GameScore, GameScore2
 
 # 어플
 class MobileLogin(APIView):
@@ -38,7 +40,7 @@ class MobileShowMember(APIView):
         mem_id = request.data.get('mem_id',"")
         user = Members.objects.filter(mem_id=mem_id).first()
         data = dict(
-            mem_id=user.mem_id, 
+            mem_id=user.mem_id,
             mem_name=user.mem_name,
             mem_birth = user.mem_birth,
             mem_gender = user.mem_gender,
@@ -79,8 +81,8 @@ from matplotlib import pyplot as plt
 UPLOAD_DIR = 'media/'
 
 def Dataization(img_path):
-    image_h = 28
-    image_w = 28
+    image_h = 224
+    image_w = 224
     img = cv2.imread(img_path)
     # k = np.array([[1,1,1],[1,1,1],[1,1,1]]) * (1/9)
     # 미디언 블러 처리
@@ -168,3 +170,65 @@ class ScoreData(APIView):
         mem_id = request.data.get('mem_id', "")
         class_object = ImgSave.objects.filter(mem_id=mem_id).order_by('-mem_seq')[0]
         return Response(dict(msg="이미지저장완료", code="200",imgurl=class_object.exam_img.url, score=class_object.exam_result, date=class_object.exam_date))
+
+class GameSave(APIView):
+    def post(self, request):
+        print("로그 : " + str(request.body))
+        mem_id = request.data.get('mem_id', "")
+        user_id = Members.objects.get(pk=mem_id)
+        score1 = request.data.get('game_score1', 0)
+        score2 = request.data.get('game_score2', 0)
+        score3 = request.data.get('game_score3', 0)
+        score4 = request.data.get('game_score4', 0)
+        obj = GameScore2.objects.filter(mem_id=mem_id).order_by('-game_score1').aggregate(game_score1=Max('game_score1'))
+        obj2 = GameScore2.objects.filter(mem_id=mem_id).order_by('-game_score2').aggregate(game_score2=Max('game_score2'))
+        obj3 = GameScore2.objects.filter(mem_id=mem_id).order_by('-game_score3').aggregate(game_score3=Max('game_score3'))
+        obj4 = GameScore2.objects.filter(mem_id=mem_id).order_by('-game_score4').aggregate(game_score4=Max('game_score4'))
+        max1 = obj['game_score1']
+        max2 = obj2['game_score2']
+        max3 = obj3['game_score3']
+        max4 = obj4['game_score4']
+        if max1 == None or max2==None or max3==None or max4==None:
+            test = GameScore2()
+            test.game_score1 = score1
+            test.game_score2 = score2
+            test.game_score3 = score3
+            test.game_score4 = score4
+            test.mem = user_id
+            test.save()
+        else:
+            if int(max1) < int(score1) or int(max2) < int(score2) or int(max3) < int(score3) or int(max4) < int(score4):
+                test = GameScore2()
+                test.game_score1 = score1
+                test.game_score2 = score2
+                test.game_score3 = score3
+                test.game_score4 = score4
+                test.mem = user_id
+                test.save()
+            else:
+                return Response(dict(msg="게임점수저장실패", code="400"))
+        return Response(dict(msg="게임점수저장성공", code="200"))
+
+
+class GameScoreShow(APIView):
+    def post(self, request):
+        mem_id = request.data.get('mem_id', "")
+        obj = GameScore2.objects.filter(mem_id=mem_id).order_by('-game_score1').aggregate(game_score1=Max('game_score1'))
+        obj2 = GameScore2.objects.filter(mem_id=mem_id).order_by('-game_score2').aggregate(game_score2=Max('game_score2'))
+        obj3 = GameScore2.objects.filter(mem_id=mem_id).order_by('-game_score3').aggregate(game_score3=Max('game_score3'))
+        obj4 = GameScore2.objects.filter(mem_id=mem_id).order_by('-game_score4').aggregate(game_score4=Max('game_score4'))
+        max1 = obj['game_score1']
+        max2 = obj2['game_score2']
+        max3 = obj3['game_score3']
+        max4 = obj4['game_score4']
+        print(max1)
+        print(max2)
+        print(max3)
+        print(max4)
+        data= dict(
+            max1=max1,
+            max2=max2,
+            max3=max3,
+            max4=max4
+        )
+        return Response(data)
