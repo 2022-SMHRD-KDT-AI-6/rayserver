@@ -39,3 +39,15 @@ img_files = os.path.join(BASE_DIR,'img/')
 def practice(request):
     print(img_files)
     return HttpResponse('Hello world!')
+
+def trainInfoOne(request):
+    if request.method == 'POST':
+        query_set = TrainingTable3.objects.all()
+        serializer = TrainingSerializer(query_set, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+class trainInfoOne(APIView):
+    def post(self, request):
+        print("로그:"+str(request.body))
+        class_object = TrainingTable3.objects.all().order_by('-train_seq')[0]
+        return Response(dict(msg="운동데이터하나", code="200", imgurl=class_object.train_img.url, title=class_object.train_title, info=class_object.train_info))

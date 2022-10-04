@@ -2,7 +2,7 @@ from django.conf.urls import include
 from django.urls import path
 # from .views import MobileLogin, MobileRegist, ImageScore, MobileShowMember, ScoreData
 from .views import *
-from .views import foodinfo, trainInfo, columnInfo, practice
+from .views import foodinfo, trainInfo, columnInfo, practice,trainInfoOne
 
 
 
@@ -12,7 +12,9 @@ urlpatterns = [
     path('food', foodinfo, name='food'),
     path('train', trainInfo, name='train'),
     path('column', columnInfo, name='column'),
-    path('allinsert',practice,name='allinsert')
+    path('allinsert',practice,name='allinsert'),
+
+    path('trainone', trainInfoOne.as_view(), name='trainone'),
 
 ]
 
