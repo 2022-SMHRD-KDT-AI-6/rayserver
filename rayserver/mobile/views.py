@@ -197,7 +197,7 @@ class GameSave(APIView):
             test.mem = user_id
             test.save()
         else:
-            if int(max1) < int(score1) or int(max2) < int(score2) or int(max3) < int(score3) or int(max4) < int(score4):
+            if int(max1) <= int(score1) or int(max2) <= int(score2) or int(max3) <= int(score3) or int(max4) <= int(score4):
                 test = GameScore2()
                 test.game_score1 = score1
                 test.game_score2 = score2
