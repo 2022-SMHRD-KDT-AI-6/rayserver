@@ -81,8 +81,8 @@ from matplotlib import pyplot as plt
 UPLOAD_DIR = 'media/'
 
 def Dataization(img_path):
-    image_h = 224
-    image_w = 224
+    image_h = 28
+    image_w = 28
     img = cv2.imread(img_path)
     # k = np.array([[1,1,1],[1,1,1],[1,1,1]]) * (1/9)
     # 미디언 블러 처리
@@ -149,7 +149,7 @@ class ImageScore(APIView):
             name.append(file)
             test2.append(Dataization(image_dir + file_name))
             test2 = np.array(test2)
-            model = load_model('model.h5')
+            model = load_model('ray_canny_1004.h5')
             # 오류 해결
             y_prob = model.predict(test2, verbose=0) 
             predict = y_prob.argmax(axis=-1)

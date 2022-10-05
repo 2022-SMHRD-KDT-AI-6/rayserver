@@ -81,6 +81,7 @@ INSTALLED_APPS = [
     'fileup',
     'chart',
     'info',
+    'search',
 ]
 
 MIDDLEWARE = [

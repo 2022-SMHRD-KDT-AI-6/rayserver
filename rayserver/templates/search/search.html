@@ -1,0 +1,40 @@
+{% extends "include/base.html" %}
+{% load static %}
+{% block main_area %}
+<h1>검색결과 출력 - 검색어 : <b>"{{ query }}"</b></h1><br>
+<!-- 여기 바로 위에 한줄 넣었음 -->
+<div class="row">
+    {% for product in products %}
+    <div class="col-lg-4">
+        <div class= "box">
+            <center class="aaaaa">
+                {% if 'm_id' in request.session %}
+                <!-- 검사아이디 = {{request.session.m_id}} -->
+                {% endif %}
+                
+            <br><br>
+            <h3>검사번호 : {{product.mem_seq}}</h3>
+            <br>
+            <a href="../predict/product/{{product.pk}}">
+                <img class="card-img-top" src="{{product.exam_img.url}}">
+            </a>
+            
+            <br><br>
+            <h6 >검사아이디 : {{product.mem_id}}</h6>   
+            <h6>검사결과 : {{product.exam_result}}</h6>
+            <h6>검사날짜 : {{product.exam_date}}</h6>
+            <br>
+            <a href="../predict/product/{{product.pk}}" class="btn-success22">자세히 보기</a>
+
+            <br><br><br>
+                </center>
+                
+        </div>
+        <br>
+    </div>
+        {% empty %}
+            <h4>결과 없음</h4>
+    {% endfor %} 
+</div>
+
+{% endblock main_area %}

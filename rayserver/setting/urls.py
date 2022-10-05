@@ -31,6 +31,7 @@ urlpatterns = [
     path('predict/', include('predict.urls')),
     path('member/', include('member.urls')),
     path('info/', include('info.urls')),
+    path('search/', include('search.urls')),
 
     path('board/', include('board.urls')),
     path('fileup/', include('fileup.urls')),
