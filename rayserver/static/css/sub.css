@@ -654,8 +654,8 @@ Front-end Develope : kitae Kim, inhwan Bea, Jongmin Kim
 .btnGuide{display:inline-block; float:right; width:244px; height:40px; padding-left:25px; line-height:40px; font-size:14px; font-weight:600; color:#fff; background:#f57a44 url(../../images/introduce/ico_download.gif) no-repeat 231px 15px; zoom:1; *display:inline;}
 
 /* 테이블 */
-.tableType2{border-top:2px solid #f15a21; width:100%;}
-.tableType2 thead th{border:1px solid #ddd; border-bottom:1px solid #616365; background:#fcfcfc; padding:12px 0 11px; font-size:14px; font-weight:600;}
+.tableType2{border-top:2px solid #F29200; width:100%;}
+.tableType2 thead th{border:1px solid #ddd; border-bottom:1px solid #616365; background:#fcfcfc; padding:12px 0 11px; font-size:14px; font-weight:600; text-align: center;}
 .tableType2 tbody td{border:1px solid #ddd; text-align:center; padding:17px 15px; font-size:13px; color:#444; word-break:normal !important;}
 
 .tableType4{width:100%;}
