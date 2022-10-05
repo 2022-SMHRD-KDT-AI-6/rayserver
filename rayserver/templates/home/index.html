@@ -305,7 +305,11 @@
 			{% comment %} {{mem_score}} {% endcomment %}
       <div class="d-xl-flex justify-content-between align-items-start">
                   {% if 'm_id' in request.session %}
+				  	{%if mem_score != None%}
               		<h2 class="text-dark font-weight-bold mb-2"> 최근 검진 결과 : {{mem_score}}점</h2>
+					{% else %}
+					<h2 class="text-dark font-weight-bold mb-2"> 최근 검진 결과 : 0점</h2>
+					{%endif%}
                   <!--차트가 그려질 부분-->
                   <div class="d-sm-flex justify-content-xl-between align-items-center mb-2">
                     <canvas id="myChart"></canvas>

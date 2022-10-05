@@ -184,7 +184,8 @@ def chart_view(request):
         mem_id = request.session.get("m_id","")
         print(mem_id)
         if mem_id != "":
-            mem_score = ImgSave.objects.filter(mem_id=mem_id).order_by('-mem_seq')[0]
+
+            mem_score = ImgSave.objects.filter(mem_id=mem_id).order_by('-mem_seq').first()
         #print(mem_score)
         #print(results)
 
