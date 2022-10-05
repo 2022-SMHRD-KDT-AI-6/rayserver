@@ -1,7 +1,15 @@
 {% extends "include/base.html" %}
 {% load static %}
 {% block main_area %}
-{% comment %} <h3>검색결과 출력 - 검색어 : <b>"{{ query }}"</b></h3> {% endcomment %}
+<fieldset>
+    <legend>치매시설정보 검색결과 출력 - 검색어 : <b>"{{ query }}"</b></legend>
+</fieldset>
+  <!--/검색-->
+ <!-- 부트스트랩 폼 디자인 참고 https://getbootstrap.com/docs/4.0/components/navbar/#forms -->
+ <form class="form-inline my-2 my-lg-0" action="/search/place" method="get">
+  {% comment %} <input class="form-control mr-sm-2" type="search" placeholder="검색" name="kw"> {% endcomment %}
+  <input type="search" style="width: 450px;" class="inputType1" name="kw" placeholder="기관명을 입력해 주세요.">
+</form>  
 <div class="facility_form fix" style="margin-top: 30px;">
     <!-- <div class="tbl_info_wrap fix left" style="margin: 0 0 2px 0">
       <div class="left" style="margin:5px 0 0 0"><span>검색된 데이터 : <strong id="total_cnt">41529</strong>건</span></div>

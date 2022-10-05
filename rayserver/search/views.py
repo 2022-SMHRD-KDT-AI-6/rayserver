@@ -11,7 +11,7 @@ def searchResult(request):
     if 'kw' in request.GET:
         query = request.GET.get('kw')
         products = ImgSave.objects.all().filter(
-            #Q(mem_seq__icontains=query) | #순번 검색
+            Q(mem_seq__icontains=query) | #순번 검색
             Q(exam_result__icontains=query) #점수결과 검색
             #Q((mem.mem_id)__icontains=query) #아이디결과 검색
         )
@@ -24,7 +24,10 @@ def searchResult2(request):
     if 'kw' in request.GET:
         query = request.GET.get('kw')
         boards = PlaceInfo.objects.all().filter(
-            Q(category__icontains=query) #점수결과 검색
+            Q(category__icontains=query) | # 카테고리검색
+            Q(name__icontains=query)| # 이름검색
+            Q(address__icontains=query)| # 주소검색
+            Q(tel__icontains=query) # 전화검색
         )
         page = request.GET.get('page', '1') #GET 방식으로 정보를 받아오는 데이터
         paginator = Paginator(boards, '10') #Paginator(분할될 객체, 페이지 당 담길 객체수)
