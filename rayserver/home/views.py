@@ -53,6 +53,13 @@ def imgresult_view(request):
     return render(request, 'predict/all.html', context)
 
 
+def change_view(request):
+    context = {}
+    context['m_id'] = request.session.get('m_id', '')
+    context['m_name'] = request.session.get('m_name', '')
+    return render(request, 'home/pages/samples/change.html', context)
+
+
 
 class ChartView(View):
     def get(self, request):

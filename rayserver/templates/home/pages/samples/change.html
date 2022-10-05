@@ -34,11 +34,7 @@
                     <input id="signup-pw" type="password" name="mem_pw"></input>
                     <span class="pw-lock"></span>
                 </span>
-                <h3>비밀번호 재확인</h3>
-                <span class="signup-input">
-                    <input id="signup-pww" type="password" name="mem_pw2"></input>
-                    <span class="pww-lock"></span>
-                </span>
+                
             </div>
             <div style="margin-top: 35px;">
                 <!--이름,생년월일,성별,이메일-->
@@ -96,14 +92,14 @@
 
             </div>
 
-          
+           
         </form>
-        
-             <br>
+
+            <br>
             <div>
                 <!--가입하기-->
                 <div class="signup-btn-wrap">
-                    <button id="signup-btn" type="button" onclick="memReg()">가입하기</button>
+                    <button id="signup-btn" type="button" onclick="memReg()">변경하기</button>
                 </div>
             </div>
             
@@ -135,17 +131,6 @@
             {% if message %}
             <script>alert('{{ message }}');</script>
             {% endif %}
-
-
-
-
-        <!--저작권 정보-->
-        <footer>
-            <div class="copyright-wrap" style="font-size: 12px;">
-                <span>이용약관 | 개인정보처리방침 | 책임의 한계와 고지 | 회원정보 고객센터</span>
-                <div>© 기억할레이.</div>
-            </div>
-        </footer>
 
     </div>
 

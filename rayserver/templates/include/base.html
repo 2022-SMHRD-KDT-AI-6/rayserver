@@ -12,7 +12,7 @@
     <script type="text/javascript" src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/jquery-ui.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    <link rel="stylesheet" href="{% static 'assets/images/reyhlg22.png' %}" />
+    <link rel="shortcut icon" href="{% static 'assets/images/reyhlg22.png' %}" />
     
     <link rel="stylesheet" href="{% static 'assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css' %}" />
     <link rel="stylesheet" href="{% static 'assets/vendors/css/vendor.bundle.base.css' %}" />
@@ -135,63 +135,10 @@
                   </div>
                 </div>
               </li>
-
-
-              <!-- 여기는 알림아이콘 부분 시작 -->
-              {% if 'm_id' in request.session %}
-              
-              <li class="nav-item dropdown">
-                <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
-                  <i class="mdi mdi-bell-outline"></i>
-                  <span class="count-symbol bg-danger"></span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-                  <h6 class="p-3 mb-0 bg-primary text-white py-4">알림!</h6>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-success">
-                        <i class="mdi mdi-calendar"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                      <h6 class="preview-subject font-weight-normal mb-1">정기검진까지 10일 남았습니다.</h6>
-                      <p class="text-gray ellipsis mb-0"> 뭐 적으려면 적던가 </p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-warning">
-                        <i class="mdi mdi-settings"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                      <h6 class="preview-subject font-weight-normal mb-1">그래</h6>
-                      <p class="text-gray ellipsis mb-0"> 그래그래 </p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-info">
-                        <i class="mdi mdi-link-variant"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                      <h6 class="preview-subject font-weight-normal mb-1">링크같은거??</h6>
-                      <p class="text-gray ellipsis mb-0"> 모르겠다 </p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <h6 class="p-3 mb-0 text-center">
-                    
-                </h6>
-                </div>
-              </li>
-              {% endif %}
-              <!-- 여기까지 알림 아이콘 끝 -->
             </ul>
+
+
+
             <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
               <span class="mdi mdi-menu"></span>
             </button>
@@ -249,12 +196,8 @@
                 
                 <div class="collapse" id="auth">
                   <ul class="nav flex-column sub-menu">
-                    <!-- <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html"> Blank Page </a></li> -->
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/loginn.html"> 고민중.. </a></li>
-                    <!-- <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> 404 </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> 500 </a></li>
-                  </ul> -->
+                    <li class="nav-item"> <a class="nav-link" href="/change"> 회원 정보 수정 </a></li>
+                  </ul> 
                 </div>
               </li>
               <!-- 도큐먼트 클릭부분 -->
@@ -265,16 +208,6 @@
                   </span>
                   <span class="menu-title">중앙치매센터</span>
                 </a>
-              </li>
-  
-  
-             <!-- 옆 세팅, 로그아웃버튼 부분 -->
-              <li class="nav-item sidebar-user-actions">
-                <div class="sidebar-user-menu">
-                  <a href="#" class="nav-link"><i class="mdi mdi-settings menu-icon"></i>
-                    <span class="menu-title">설정</span>
-                  </a>
-                </div>
               </li>
             </ul>
           </nav>
