@@ -55,21 +55,11 @@
     <!--게시판 리스트-->
     <div>
       <table cellspacing="0" cellpadding="0" border="0" summary="게시판 리스트" class="tableType2">
-
-        <caption>치매시설정보</caption>
-        <colgroup>
-          <col width="15%">
-          <col width="*">
-          <col width="19%">
-          <col width="7%">
-        </colgroup>
-
         <thead>
           <tr>
             <th scope="col">구분</th>
             <th scope="col">시설명/주소</th>
             <th scope="col">전화번호</th>
-            <th scope="col">상세보기</th>
           </tr>
         </thead>
 
@@ -94,9 +84,7 @@
            <td>
             {{board.tel}}
           </td> 
-            <td>
-              <a class="sapa_btn_s1_1" style="color:#fff; background:#f15a21; border:0;" href="javascript:open_view_pop(1);">상세</a>
-            </td>
+            
           </tr>
           {% endfor %}
           
