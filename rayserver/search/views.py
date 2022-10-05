@@ -11,29 +11,22 @@ def searchResult(request):
     if 'kw' in request.GET:
         query = request.GET.get('kw')
         products = ImgSave.objects.all().filter(
-            Q(mem_seq__icontains=query) | #순번 검색
+            #Q(mem_seq__icontains=query) | #순번 검색
             Q(exam_result__icontains=query) #점수결과 검색
+            #Q((mem.mem_id)__icontains=query) #아이디결과 검색
         )
 
     return render(request, 'search/search.html', {'query':query, 'products':products})
+from django.core.paginator import Paginator
+from home.models import PlaceInfo
 
-from django.views.generic import CreateView, DetailView,TemplateView,View
-
-class StoreView(TemplateView):
-    template_name = "predict/all.html"
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        # Data = 장바구니데이타(self.request)
-        # cartItems = Data['cartItems']
-        # products = ImgSave.objects.all().order_by('-mem_seq')
-        # request.session['m_id'] = mem_id
-        # mem_id = request.session.get('m_id', '')
-        # print('a :  '+context['m_id'])
-        
-        
-        mem_id = self.request.session.get("m_id")
-        products = ImgSave.objects.filter(mem_id=mem_id).order_by('-mem_seq')
-        context['products'] = products
-        # context['cartItems'] = cartItems
-        print(context)
-        return context
+def searchResult2(request):
+    if 'kw' in request.GET:
+        query = request.GET.get('kw')
+        boards = PlaceInfo.objects.all().filter(
+            Q(category__icontains=query) #점수결과 검색
+        )
+        page = request.GET.get('page', '1') #GET 방식으로 정보를 받아오는 데이터
+        paginator = Paginator(boards, '10') #Paginator(분할될 객체, 페이지 당 담길 객체수)
+        page_obj = paginator.page(page) #페이지 번호를 받아 해당 페이지를 리턴 get_page 권장
+        return render(request, 'search/search2.html', {'query':query, 'page_obj':page_obj})

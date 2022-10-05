@@ -1,53 +1,8 @@
 {% extends "include/base.html" %}
 {% load static %}
 {% block main_area %}
-
-<fieldset>
-    <legend>치매시설정보 검색</legend>
-
-    <div class="facility_search_area fix">
-
-      <ul class="nn_type1_search_ul fix">
-        <li>
-          <strong class="search_tit">지역 선택</strong>
-          <select class="search_select" id="sido" name="sido" onchange="change_sido( this.value );">
-            <option value="">시도 선택</option>
-            <option value="FA_010">강원도</option><option value="FA_009">경기도</option><option value="FA_016">경상남도</option><option value="FA_015">경상북도</option><option value="FA_005">광주광역시</option><option value="FA_003">대구광역시</option><option value="FA_006">대전광역시</option><option value="FA_002">부산광역시</option><option value="FA_001">서울특별시</option><option value="FA_008">세종특별자치시</option><option value="FA_007">울산광역시</option><option value="FA_004">인천광역시</option><option value="FA_014">전라남도</option><option value="FA_013">전라북도</option><option value="FA_017">제주특별자치도</option><option value="FA_012">충청남도</option><option value="FA_011">충청북도</option>
-          </select>
-          <select class="search_select" id="gugun" name="gugun">
-            <option value="">시/군/구 선택</option>
-          </select>
-        </li>
-
-        <li>
-          <strong class="search_tit">기관명 검색</strong>
-          <input type="text" style="width: 450px;" class="inputType1" name="title" placeholder="기관명을 입력해 주세요.">
-          <input type="button" id="btnSearch" class="btn_search" value="검색">
-
-        </li>
-        <li>
-          <p style="margin-bottom: 7px; font-weight: 600; color: #f79d00; font-size: 13px; margin-left: 135px;">※ 시설상세 검색을 선택하여 상세 검색하실 수 있습니다.</p>
-        </li>
-      </ul>
-
-
-    </div>
-
-
-
-  </fieldset>
-  <!--/검색-->
- <!-- 부트스트랩 폼 디자인 참고 https://getbootstrap.com/docs/4.0/components/navbar/#forms -->
- <form class="form-inline my-2 my-lg-0" action="{% url 'search:searchResult' %}" method="get">
-                
-                        
-  <input class="form-control mr-sm-2" type="search" placeholder="검색" name="kw">
-          
-          
-</form>    
-
-
-  <div class="facility_form fix" style="margin-top: 30px;">
+{% comment %} <h3>검색결과 출력 - 검색어 : <b>"{{ query }}"</b></h3> {% endcomment %}
+<div class="facility_form fix" style="margin-top: 30px;">
     <!-- <div class="tbl_info_wrap fix left" style="margin: 0 0 2px 0">
       <div class="left" style="margin:5px 0 0 0"><span>검색된 데이터 : <strong id="total_cnt">41529</strong>건</span></div>
     </div> -->
@@ -98,6 +53,8 @@
               <a class="sapa_btn_s1_1" style="color:#fff; background:#f15a21; border:0;" href="javascript:open_view_pop(1);">상세</a>
             </td>
           </tr>
+              {% empty %}
+                  <h4>결과 없음</h4>
           {% endfor %}
           
                 
@@ -166,6 +123,7 @@
 
 
       </div> 
-      <!-- 여기가 회색부분 끝임 -->
+
+
 
 {% endblock main_area %}
