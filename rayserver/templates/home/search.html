@@ -37,6 +37,15 @@
 
   </fieldset>
   <!--/검색-->
+ <!-- 부트스트랩 폼 디자인 참고 https://getbootstrap.com/docs/4.0/components/navbar/#forms -->
+ <form class="form-inline my-2 my-lg-0" action="/searchResult" method="get">
+                
+                        
+  <input class="form-control mr-sm-2" type="search" placeholder="검색" name="kw">
+          
+          
+</form>    
+
 
   <div class="facility_form fix" style="margin-top: 30px;">
     <!-- <div class="tbl_info_wrap fix left" style="margin: 0 0 2px 0">
@@ -47,7 +56,7 @@
     <div>
       <table cellspacing="0" cellpadding="0" border="0" summary="게시판 리스트" class="tableType2">
 
-        <caption>게시판 리스트</caption>
+        <caption>치매시설정보</caption>
         <colgroup>
           <col width="15%">
           <col width="*">
@@ -67,34 +76,83 @@
         
         <tbody id="dev_tbody">
 
-          
+          {% for board in page_obj %}
           <tr>
             <td>
-              <p class="btn_fac ty1">중앙</p>
+              <p class="btn_fac ty1">
+                {{board.category}}
+              </p>
             </td> 
             <td>   
-              <p class="fac_name">중앙치매센터</p>
-              <p class="fac_adr">서울특별시 중구 을지로 245 (을지로 6가 18-79) 국립중앙의료원 중앙치매센터</p>
+              <p class="fac_name">
+                {{board.name}}
+              </p>
+              <p class="fac_adr">
+                {{board.address}}
+              </p>
             </td>
-           <td>1666-0921</td> 
+           <td>
+            {{board.tel}}
+          </td> 
             <td>
               <a class="sapa_btn_s1_1" style="color:#fff; background:#f15a21; border:0;" href="javascript:open_view_pop(1);">상세</a>
             </td>
           </tr>
-
+          {% endfor %}
           
                 
             
                   </tbody>
         
       </table>
-
+<!-- 페이징처리 시작 -->
+<div id="paging">
+  <ul class="pagination justify-content-center" style="margin-top: 2rem;">
+      <!-- 이전페이지 -->
+      {% if page_obj.has_previous %}
+      <li class="page-item">
+          <a class="page-link" href="?&page={{ page_obj.previous_page_number }}">이전</a>
+          <!-- href로 뎁스 설정 -->
+      </li>
+      {% else %}
+      <li class="page-item disabled">
+          <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+      </li>
+      {% endif %}
+      <!-- 페이지리스트 -->
+      {% for page_number in page_obj.paginator.page_range %}
+      {% if page_number >= page_obj.number|add:-5 and page_number <= page_obj.number|add:5 %}
+      {% if page_number == page_obj.number %}
+      <li class="page-item active" aria-current="page">
+        <a class="page-link" href="?&page={{ page_number }}">{{ page_number }}</a>
+      </li>
+      {% else %}
+      <li class="page-item">
+          <a class="page-link" href="?&page={{ page_number }}">{{ page_number }}</a>
+      </li>
+      {% endif %}
+      {% endif %}
+      {% endfor %}
+      <!-- 다음페이지 -->
+      {% if page_obj.has_next %}
+      <li class="page-item">
+          <a class="page-link" href="?&page={{ page_obj.next_page_number }}">다음</a>
+      </li>
+      {% else %}
+      <li class="page-item disabled">
+          <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+      </li>
+      {% endif %}
+   
+  </ul>
+</div>
+<!-- 페이징처리 끝 -->
     </div>
 
     <!--페이징-->
-    <div class="updown_situation flo_x" style="position: relative;">
+    {% comment %} <div class="updown_situation flo_x" style="position: relative;">
       <div id="div_paging" class="paging_num_list_wrap"><div class="foot_list1"><ol><li class="li_num on"><a href="javascript:;">1</a></li><li class="li_num"><a href="javascript:getList(&quot;2&quot;);">2</a></li><li class="li_num"><a href="javascript:getList(&quot;3&quot;);">3</a></li><li class="li_num"><a href="javascript:getList(&quot;4&quot;);">4</a></li><li class="li_num"><a href="javascript:getList(&quot;5&quot;);">5</a></li><li class="li_num"><a href="javascript:getList(&quot;6&quot;);">6</a></li><li class="li_num"><a href="javascript:getList(&quot;7&quot;);">7</a></li><li class="li_num"><a href="javascript:getList(&quot;8&quot;);">8</a></li><li class="li_num"><a href="javascript:getList(&quot;9&quot;);">9</a></li><li class="li_num"><a href="javascript:getList(&quot;10&quot;);">10</a></li></ol><a href="javascript:getList(&quot;11&quot;);"><img src="/images/sub/paging_next.gif" alt="다음"></a><a href="javascript:getList(&quot;4153&quot;);"><img src="/images/sub/paging_last.gif" alt="마지막으로"></a></div></div>
-    </div>
+    </div> {% endcomment %}
     <!--/페이징-->
 
 

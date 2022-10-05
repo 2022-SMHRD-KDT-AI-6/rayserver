@@ -311,7 +311,7 @@ def chart_view(request):
 
 import csv
 def csvToModel(request):
-    path = "C:/Users/smhrd/Desktop/csvplace2.csv"
+    path = "./material/csv/csvplace2.CSV"
     file = open(path)
     reader = csv.reader(file)
     print('----', reader)
@@ -321,18 +321,29 @@ def csvToModel(request):
     PlaceInfo.objects.bulk_create(list)
     return HttpResponse('create model ~~')
 
+from django.core.paginator import Paginator
 def place_view(request):
-    context = {}
-    # m_id 세션변수 값이 없다면 '' 을 넣어라
-    context['m_id'] = request.session.get('m_id', '')
-    context['m_name'] = request.session.get('m_name', '')
+    boards = PlaceInfo.objects.all()
+    # boards 페이징 처리
+    page = request.GET.get('page', '1') #GET 방식으로 정보를 받아오는 데이터
+    paginator = Paginator(boards, '10') #Paginator(분할될 객체, 페이지 당 담길 객체수)
+    page_obj = paginator.page(page) #페이지 번호를 받아 해당 페이지를 리턴 get_page 권장
+    return render(request, 'home/search.html', {'page_obj':page_obj})
 
+from django.shortcuts import render
+from django.db.models import Q
 
-    return render(request, 'home/search.html', context)
+# filter 함수의 Q함수: OR조건으로 데이터를 조회하기 위해 사용하는 함수
+# objects.filter() 는 특정 조건에 해당하면 객체 출력 .get('kw') 은 kw만 반환
+# __icontains 연산자 : 대소문자를 구분하지 않고 단어가 포함되어 있는지 검사. 사용법 "필드명"__icontains = 조건값
 
-from django.views import generic
+def searchResult(request):
+    
+    if 'kw' in request.GET:
+        query = request.GET.get('kw')
+        products = PlaceInfo.objects.all().filter(
+            Q(name__icontains=query) | #이름 검색
+            Q(description__icontains=query) #설명 검색
+        )
 
-class board(generic.TemplateView):
-    template_name: 'home/search.html'
-    list = PlaceInfo.objects.all()
-    pass
+    return render(request, 'home/search2.html', {'query':query, 'products':products})
