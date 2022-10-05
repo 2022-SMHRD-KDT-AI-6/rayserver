@@ -1917,7 +1917,8 @@ caption {
 
 th {
   text-align: inherit;
-  text-align: -webkit-match-parent; }
+  text-align: -webkit-match-parent; 
+color: #F29200;}
 
 label {
   display: inline-block;
@@ -1998,7 +1999,8 @@ legend {
   font-size: 1.5rem;
   line-height: inherit;
   color: inherit;
-  white-space: normal; }
+  white-space: normal; 
+color: black;}
 
 progress {
   vertical-align: baseline; }
@@ -6017,8 +6019,8 @@ input[type="button"].btn-block {
   padding: 0.5rem 0.75rem;
   margin-left: -1px;
   line-height: 1.25;
-  color: #fff;
-  background-color: #F29200;
+  color: #F29200;
+  background-color: #fff;
   border: 1px solid #dee2e6; }
   .page-link:hover {
     z-index: 2;
@@ -6044,8 +6046,8 @@ input[type="button"].btn-block {
 .page-item.active .page-link {
   z-index: 3;
   color: #fff;
-  background-color: #007bff;
-  border-color: #007bff; }
+  background-color: #F29200;
+  border-color:#F29200; }
 
 .page-item.disabled .page-link {
   color: #6c757d;

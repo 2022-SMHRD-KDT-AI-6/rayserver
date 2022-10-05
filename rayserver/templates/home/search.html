@@ -23,9 +23,11 @@
       <table cellspacing="0" cellpadding="0" border="0" summary="게시판 리스트" class="tableType2">
         <thead>
           <tr>
+            <b>
             <th scope="col">구분</th>
             <th scope="col">시설명/주소</th>
             <th scope="col">전화번호</th>
+            </b>
           </tr>
         </thead>
 
@@ -35,13 +37,15 @@
           {% for board in page_obj %}
           <tr>
             <td>
-              <p class="btn_fac ty1">
-                {{board.category}}
-              </p>
+              <center>
+              <b><span class="btn_fac ty1">
+                {{board.category}}</b>
+              </span>
+            </center>
             </td> 
             <td>   
-              <p class="fac_name">
-                {{board.name}}
+              <b><p class="fac_name">
+                {{board.name}}</b>
               </p>
               <p class="fac_adr">
                 {{board.address}}

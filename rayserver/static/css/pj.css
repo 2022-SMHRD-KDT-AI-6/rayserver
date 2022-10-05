@@ -76,6 +76,19 @@ margin-left: 10px;
     height: 380px;
 } */
 
-.ctct {
+.btn_fac {
+    background-color: #F29200;
+    width: 85px;
+    height: 45px;
     text-align: center;
+    color: #fff;
+    border-color: #F29200;
+    align-content: center;
+    padding: 0.9rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 55%;
+}
+
+.fac_name {
+    font-size: 1rem;
 }
