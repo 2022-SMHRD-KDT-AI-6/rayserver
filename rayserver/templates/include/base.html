@@ -196,7 +196,9 @@
                 
                 <div class="collapse" id="auth">
                   <ul class="nav flex-column sub-menu">
+                    {% if request.session.m_id%}
                     <li class="nav-item"> <a class="nav-link" href="/change"> 회원 정보 수정 </a></li>
+                    {% endif %}
                   </ul> 
                 </div>
               </li>

@@ -199,7 +199,9 @@
               
               <div class="collapse" id="auth">
                 <ul class="nav flex-column sub-menu">
+				{% if m_id%}
                   <li class="nav-item"> <a class="nav-link" href="/change"> 회원 정보 수정 </a></li>
+				{% endif %}
 				  <li class="nav-item"> <a class="nav-link" href="pages/samples/loginn.html"> 파일 다운받기 </a></li>
               </div>
             </li>
