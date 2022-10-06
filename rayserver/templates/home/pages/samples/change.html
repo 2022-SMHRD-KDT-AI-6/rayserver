@@ -19,14 +19,21 @@
                         class="image"></a>
             </div>
         </header>
-        <!--회원가입 부분-->
+        
+        <!--회원가입수정 부분-->
+        {% if message %}
+            <script>
+                alert({{message}})
+            </script>
+        {% endif %}
         <section class="signup-wrap">
             <form name="f1" method="post">
             <div>
+                {% for info in user%}
                 <!--아이디,비번,비번재확인-->
                 <h3>아이디</h3>
                 <span class="signup-input">
-                    <input id="signup-id" type="text" name="mem_id"></input>
+                    <input id="signup-id" type="text" name="mem_id" value="{{info.mem_id}}" readonly></input>
                     <span class="signup-at"></span>
                 </span>
                 <h3>비밀번호</h3>
@@ -34,13 +41,17 @@
                     <input id="signup-pw" type="password" name="mem_pw"></input>
                     <span class="pw-lock"></span>
                 </span>
-                
+                <h3>비밀번호 재확인</h3>
+                <span class="signup-input">
+                    <input id="signup-pww" type="password" name="mem_pw2"></input>
+                    <span class="pww-lock"></span>
+                </span>
             </div>
             <div style="margin-top: 35px;">
                 <!--이름,생년월일,성별,이메일-->
                 <h3>이름</h3>
                 <span class="signup-input">
-                    <input id="signup-name" type="text" name="mem_name"></input>
+                    <input id="signup-name" type="text" name="mem_name" value="{{info.mem_name}}"></input>
                 </span>
                 <h3>생년월일</h3>
                 <span style="display: flex;">
@@ -77,9 +88,6 @@
                         <!-- <option value="no">선택 안함</option> -->
                     </select>
                 </span>
-
-
-
                 <h3>회원유형</h3>
                 <span class="signup-input">
                     <select id="signup-gender" class="selectbox" name="mem_type" onchange="">
@@ -88,11 +96,9 @@
                         <!-- <option value="no">선택 안함</option> -->
                     </select>
                 </span>
-
-
+                {% endfor %}    
             </div>
 
-           
         </form>
 
             <br>
@@ -124,7 +130,7 @@
                     form.mem_name.focus();
                     return;
                 }
-                form.action = "/member/register/";
+                form.action = "/change";
                 form.submit();
             }
             </script>

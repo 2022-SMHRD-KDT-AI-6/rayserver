@@ -1,5 +1,5 @@
 from http.client import HTTPResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from requests import session
 from predict.models import ImgSave
@@ -7,8 +7,10 @@ import json
 from django.http import HttpResponse, JsonResponse
 from django.views import View
 import psycopg2
-
+from django.contrib.auth.hashers import make_password, check_password
 from .models import PlaceInfo
+from member.models import Members
+from datetime import datetime
 
 # Create your views here.
 
@@ -52,12 +54,42 @@ def imgresult_view(request):
     context['m_name'] = request.session.get('m_name', '')
     return render(request, 'predict/all.html', context)
 
-
+@csrf_exempt
 def change_view(request):
-    context = {}
-    context['m_id'] = request.session.get('m_id', '')
-    context['m_name'] = request.session.get('m_name', '')
-    return render(request, 'home/pages/samples/change.html', context)
+    if request.method == "GET":
+        mem_id = request.session.get('m_id','')
+        user = Members.objects.filter(mem_id = mem_id).all()
+        context = {'user': user}
+        # request.session = {
+        # 'user_info' : user
+        #     }
+        return render(request, 'home/pages/samples/change.html', context)
+
+    elif request.method == "POST":
+        context = {}
+        mem_id = request.POST["mem_id"]
+        mem_pw = request.POST["mem_pw"]
+        mem_pw2 = request.POST["mem_pw2"]
+        mem_name = request.POST["mem_name"]
+        mem_birth_y = request.POST["mem_birth_y"]
+        mem_birth_m = request.POST["mem_birth_m"]
+        mem_birth_d = request.POST["mem_birth_d"]
+        mem_birth = mem_birth_y+"-"+mem_birth_m+"-"+mem_birth_d
+        mem_gender = request.POST["mem_gender"]
+        mem_type = request.POST["mem_type"]
+        mem_pw_crypted = make_password(mem_pw)    # 암호화
+        print(mem_birth)
+        # 비밀번호 확인하기
+        if mem_pw != mem_pw2:
+            context = {}
+            context['message'] = "비밀번호 재확인 하십시오"
+            return render(request, 'home/pages/samples/change.html', context)
+        Members.objects.filter(mem_id = mem_id).update(mem_pw=mem_pw_crypted,mem_name=mem_name,mem_birth=mem_birth,
+        mem_gender=mem_gender, mem_type=mem_type)
+        context['message'] = mem_name + "님 회원가입 수정 되었습니다."
+        return redirect('/',context)
+
+
 
 
 
@@ -353,3 +385,4 @@ def searchResult(request):
             Q(description__icontains=query) #설명 검색
         )
     return render(request, 'home/search2.html', {'query':query, 'products':products})
+
