@@ -23,7 +23,6 @@ def chartShow(request):
     print(avg)
     context = {'avg' : avg}
     return render(request,'chart/chart_example.html', context)
-    
 
 class ChartView(View):
     def get(self, request):

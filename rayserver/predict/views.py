@@ -207,5 +207,5 @@ def imgtest(request):
         board = ImgSave.objects.filter(mem_id=mem_id).order_by('-mem_seq')[0]
         board.exam_result = raypredict
         board.save()
-        return render(request, 'predict/predict.html')
+        return render(request, 'predict/imgtest.html')
     return render(request, 'predict/imgtest.html')
