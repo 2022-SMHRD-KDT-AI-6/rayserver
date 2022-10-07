@@ -1,3 +1,4 @@
+from errno import errorcode
 from fileinput import filename
 from .models import ImgSave, Post, Test, Test2, Test3
 from django.shortcuts import render, redirect
@@ -124,6 +125,7 @@ def postcreate(request):
     blog.title = request.POST["title"]
     blog.text = request.POST["text"]
     blog.image =  request.FILES["image"]
+    
     blog.save()
     # return redirect("user:raylogin" + str(blog.id))
     return redirect("detail/"+str(blog.id))
@@ -142,70 +144,81 @@ categories = ["36.0","35.5","35.0","34.5","34.0","33.5","33.0","32.5","32.0","31
                 "12.5","12.0","11.5","11.0","10.5","10.0","9.5","9.0","8.5","8.0","7.5","7.0",
                 "6.5","6.0","5.5","5.0","4.5","4.0","3.5","3.0","2.5","2.0","1.5","1.0","0.5"]
 
+import tensorflow as tf
 
 def Dataization(img_path):
     image_h = 28
     image_w = 28
-    img = cv2.imread(img_path)
+    print(img_path)
+    img = cv2.imread(img_path, cv2.IMREAD_COLOR)
+
     k = np.array([[1,1,1],[1,1,1],[1,1,1]]) * (1/9)
-    # 미디언 블러 처리
     blur = cv2.filter2D(img, -1, k)
+    canny = cv2.Canny(blur, 30, 100)
     
-    # Edge Dectect Canny
-    # canny = cv2.Canny(blur, 30, 100)
-    # canny = cv2.Canny(merged, 30, 100)
-    # 회색조 처리
-    # img1 = cv2.imread(img_path, canny)
-    # img = can
-    # 임계값 처리
-    ret, thresh = cv2.threshold(img,127,255, cv2.THRESH_BINARY)
-    img = thresh
-    # 흑백 반전
-    inverted_image = cv2.bitwise_not(img)
-    img = inverted_image
+    # ret, thresh = cv2.threshold(img,127,255, cv2.THRESH_BINARY)
+    # img = thresh
+    # inverted_image = cv2.bitwise_not(img)
+    # img = inverted_image
+
     # 사이즈 변환 512 * 512
-    img = cv2.resize(img, None, fx=image_w/img.shape[1], fy=image_h/img.shape[0])
-    #정규화
+    # img = cv2.resize(canny,28,28)
+    print(img)
+    img = cv2.resize(canny, None, fx=image_w/img.shape[1], fy=image_h/img.shape[0])
+    
+    # #정규화
     img = cv2.normalize(img, None, alpha=0,beta=230, norm_type=cv2.NORM_MINMAX)
     return (img/256)
 
+import sys
 
 def imgtest(request):
-    print(request)
-    print(request.POST.dict())
-    if request.method == "POST":
-        mem_id = request.session['m_id']
-        user_id = Members.objects.get(pk=mem_id)
-        imgsave = ImgSave()
-        imgsave.exam_img =  request.FILES["exam_img"]
-        imgsave.mem = user_id
-        imgsave.save()
-        if 'exam_img' in request.FILES:
-            # 파라미터 처리
-            file = request.FILES['exam_img']
-            file_name = file.name  # 첨부파일 이름
-            print(file_name)
-            src = []
-            name = []
-            test = []
-            # 이미지 불러오기
-            image_dir = UPLOAD_DIR
-            src.append(image_dir + file_name)
-            name.append(file)
-            test.append(Dataization(image_dir + file_name))
-            test = np.array(test)
-            model = load_model('ray_canny_1004.h5')
+    try:
+        print(request)
+        print(request.POST.dict())
+        if request.method == "POST":
+            mem_id = request.session['m_id']
+            user_id = Members.objects.get(pk=mem_id)
+            imgsave = ImgSave()
+            imgsave.exam_img =  request.FILES["exam_img"]
+            imgsave.mem = user_id
+            imgsave.exam_result = "0"
+            imgsave.save()
+            if 'exam_img' in request.FILES:
+                # 파라미터 처리
+                file = request.FILES['exam_img']
+                file_name = file.name  # 첨부파일 이름
+                src = []
+                name = []
+                test = []
 
-            y_prob = model.predict(test, verbose=0) 
-            predict = y_prob.argmax(axis=-1)
-            raypredict = categories[predict[0]]
+                # 이미지 불러오기
+                image_dir = UPLOAD_DIR
+                src.append(image_dir + file_name)
+                name.append(file)
+                
+                case = Dataization(image_dir + file_name)
+                #print(case)
+                test.append(case)
+                test = np.array(test)
+                
+                model = load_model('ray_canny_1004.h5')
+                # model = load_model('model.h5')
 
-            print("예측 : "+ raypredict)
-            imgsave.exam_result = raypredict
-        else:
-            file_name = '-'
-        board = ImgSave.objects.filter(mem_id=mem_id).order_by('-mem_seq')[0]
-        board.exam_result = raypredict
-        board.save()
+                y_prob = model.predict(test, verbose=0) 
+                predict = y_prob.argmax(axis=-1)
+                raypredict = categories[predict[0]]
+                print("예측 : "+ raypredict)
+                imgsave.exam_result = raypredict
+
+            board = ImgSave.objects.filter(mem_id=mem_id).order_by('-mem_seq')[0]
+            board.exam_result = raypredict
+            board.save()
+            return render(request, 'predict/imgtest.html')
         return render(request, 'predict/imgtest.html')
-    return render(request, 'predict/imgtest.html')
+    except Exception as e:
+        print('예외처리: 이미지 저장실패')
+        print(e)
+        return render(request, 'predict/imgtest.html')
+
+
