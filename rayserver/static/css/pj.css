@@ -92,3 +92,20 @@ margin-left: 10px;
 .fac_name {
     font-size: 1rem;
 }
+
+#img22s {
+    height: 900px;
+    max-width: 4000px;
+    vertical-align: middle;
+    border: 0;
+    display:inline-block;
+    border-radius: 20%
+}
+#imgr {
+    height: 500px;
+    width: 700px;
+    vertical-align: middle;
+    border: 0;
+    display:inline-block;
+
+}

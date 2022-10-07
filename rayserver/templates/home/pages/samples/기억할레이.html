@@ -3,6 +3,7 @@
 {% load static %}
 {% block main_area %}
 
+<center>
           <div id="pi">
           <p class="pp">
             기억할레이
@@ -11,47 +12,51 @@
         </div>
           <div id="sbsb">
             
-        <center>
+      
               <br><br>
               <h1>기억할레이</h1> <br>
-          
+              <img id="img22s" src="{% static 'assets/images/팀사진.jpg' %}" />
+              <br><hr>
+
           <div class="my_div1" >
 
-           <div class="a11"> <img src="{% static 'assets/images/팀예시사진.png' %}" class="radius_img_2"> <p>팀장: </p></div>
-           <div class="a22"> <img src="{% static 'assets/images/팀예시사진.png' %}" class="radius_img_2"> <p>팀원:</p></div>
-           <div class="a33"> <img src="{% static 'assets/images/팀예시사진.png' %}" class="radius_img_2"> <p>팀원: </p></div>
-           <div class="a44"> <img src="{% static 'assets/images/팀예시사진.png' %}" class="radius_img_2"> <p>팀원:</p></div>
+           <div class="a11"> <img src="{% static 'assets/images/팀예시사진.png' %}" class="radius_img_2"> <h2>팀장: 최대열</h2></div>
+           <div class="a22"> <img src="{% static 'assets/images/팀예시사진.png' %}" class="radius_img_2"> <h2>팀원: 김은영</h2></div>
+           <div class="a33"> <img src="{% static 'assets/images/팀예시사진.png' %}" class="radius_img_2"> <h2>팀원: 김준호</h2></div>
+           <div class="a44"> <img src="{% static 'assets/images/팀예시사진.png' %}" class="radius_img_2"> <h2>팀원: 이수빈</h2></div>
           
-          </div>
-        </center>
+          </div>  
         </div>
 
-
-
-
- 
+     
+          <img id="imgsb" src="{% static 'assets/images/1소개소개.png' %}" />
           <br> <br> <br>
-          <h3>[레이프로젝트]</h3>
-          <li>여기에 사진이랑 소개 좀 넣고</li>
-          <ul type="square">
-            <li></li>
-          </ul>
-
-          <h3>[팀원 소개]</h3>
-          <li>여기에 사진이랑 소개 좀 넣고</li>
-          <H3>사용 기술</H3>
-          <li>사용기술이랑 정리하고</li> 
-
-
-          <h3>[프로젝트 진행 주요사항]</h3>
-          <li>내용 소개 좀 넣고</li>
-          <li>관련 사진 많이 이용하고</li> 
-          안드로이드도 관련 진행사항 정리해서 넣고
-
-          보라 주황컬러 사용이유:
-
-          
-        </div> 
+          <img id="imgsb" src="{% static 'assets/images/2장점장점.png' %}" />
+          <br> <br> <br>
+          <img id="imgsb" src="{% static 'assets/images/3내용내용.png' %}" />
+          <br> <br> <br>
+          <img id="imgsb" src="{% static 'assets/images/4기술기술.png' %}" />
+          <br> <br> <br>
+          <img id="imgsb" src="{% static 'assets/images/5결과물.png' %}" />
+          <br> <br> <br>
+          <img id="imgr" src="{% static 'assets/images/5모바일.png' %}" />
+          <img id="imgr" src="{% static 'assets/images/5웹.png' %}" />
+          <br> <br> <br>
+          <img id="imgsb" src="{% static 'assets/images/6효과효과.png' %}" />
+          <br> <br> <br>
+        </div>
+      </center>
         <!-- 여기가 메인페이지 끝 -->
+
+        {% comment %} <div id="sbsb">
+            
+          <center>
+            <br><br>
+            <h1>팀소개</h1> <br>
+        <img id="imgsb" src="{% static 'assets/images/팀소개1.png' %}" />
+        <br> <br> <br>
+        <img id="imgsb22" src="{% static 'assets/images/팀소개2.png' %}" />
+      </center>
+        </div> {% endcomment %}
 
  {% endblock main_area %}
