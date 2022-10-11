@@ -357,8 +357,10 @@
                         document.getElementById('p2').innerHTML = parseInt(({{manavg}}/36)*100)+'%';
                         document.getElementById('p3').innerHTML = parseInt(({{womanavg}}/36)*100)+'%';
                         document.getElementById('p4').innerHTML = parseInt(({{sixavg}}/36)*100)+'%';
-						document.getElementById('manNumber').innerHTML = ({{gender_number}}[0]/2)*100+'%';
-						document.getElementById('womanNumber').innerHTML = ({{gender_number}}[1]/2)*100+'%';
+						var man = parseInt({{gender_number}}[0]);
+						var woman = parseInt({{gender_number}}[1]);
+						document.getElementById('manNumber').innerHTML = man/(man+woman)*100+'%';
+						document.getElementById('womanNumber').innerHTML = woman/(man+woman)*100+'%';
 						
                     </script>
                     
