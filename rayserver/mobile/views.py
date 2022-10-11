@@ -94,6 +94,7 @@ def Dataization(img_path):
     # 회색조 처리
     # img1 = cv2.imread(img_path, canny)
     # img = can
+    
     # 임계값 처리
     ret, thresh = cv2.threshold(img,127,255, cv2.THRESH_BINARY)
     img = thresh

@@ -11,7 +11,7 @@ def searchResult(request):
     if 'kw' in request.GET:
         query = request.GET.get('kw')
         products = ImgSave.objects.all().filter(
-            Q(mem_seq__icontains=query) | #순번 검색
+            # Q(mem_seq__icontains=query) | #순번 검색
             Q(exam_result__icontains=query) #점수결과 검색
             #Q((mem.mem_id)__icontains=query) #아이디결과 검색
         )

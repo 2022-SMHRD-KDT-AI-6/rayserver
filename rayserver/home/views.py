@@ -71,21 +71,15 @@ def change_view(request):
         mem_pw = request.POST["mem_pw"]
         mem_pw2 = request.POST["mem_pw2"]
         mem_name = request.POST["mem_name"]
-        mem_birth_y = request.POST["mem_birth_y"]
-        mem_birth_m = request.POST["mem_birth_m"]
-        mem_birth_d = request.POST["mem_birth_d"]
-        mem_birth = mem_birth_y+"-"+mem_birth_m+"-"+mem_birth_d
-        mem_gender = request.POST["mem_gender"]
-        mem_type = request.POST["mem_type"]
         mem_pw_crypted = make_password(mem_pw)    # 암호화
-        print(mem_birth)
+    
         # 비밀번호 확인하기
         if mem_pw != mem_pw2:
             context = {}
             context['message'] = "비밀번호 재확인 하십시오"
             return render(request, 'home/pages/samples/change.html', context)
-        Members.objects.filter(mem_id = mem_id).update(mem_pw=mem_pw_crypted,mem_name=mem_name,mem_birth=mem_birth,
-        mem_gender=mem_gender, mem_type=mem_type)
+        Members.objects.filter(mem_id = mem_id).update(mem_pw=mem_pw_crypted,mem_name=mem_name
+        )
         context['message'] = mem_name + "님 회원가입 수정 되었습니다."
         return redirect('/',context)
 

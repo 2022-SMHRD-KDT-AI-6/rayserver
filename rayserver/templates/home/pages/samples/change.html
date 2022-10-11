@@ -53,49 +53,7 @@
                 <span class="signup-input">
                     <input id="signup-name" type="text" name="mem_name" value="{{info.mem_name}}"></input>
                 </span>
-                <h3>생년월일</h3>
-                <span style="display: flex;">
-                    <span class="signup-input-birth">
-                        <input id="signup-birth-yy" type="text" placeholder="년(4자)" name="mem_birth_y"></input>
-                    </span>
-                    <span class="signup-input-birth" style="margin-left: 10px;">
-                        <select id="signup-birth-mm" class="selectbox" name="mem_birth_m" onchange="">
-                            <option value="month">월</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                        </select>
-                    </span>
-                    <span class="signup-input-birth" style="margin-left: 10px;">
-                        <input id="signup-birth-dd" type="text" placeholder="일" name="mem_birth_d"></input>
-                    </span>
-                </span>
-
-                <h3>성별</h3>
-                <span class="signup-input">
-                    <select id="signup-gender" class="selectbox" name="mem_gender" onchange="">
-                        <option value="m">남자</option>
-                        <option value="w">여자</option>
-                        <!-- <option value="no">선택 안함</option> -->
-                    </select>
-                </span>
-                <h3>회원유형</h3>
-                <span class="signup-input">
-                    <select id="signup-gender" class="selectbox" name="mem_type" onchange="">
-                        <option value="i">개인</option>
-                        <option value="c">기관</option>
-                        <!-- <option value="no">선택 안함</option> -->
-                    </select>
-                </span>
+               
                 {% endfor %}    
             </div>
 
